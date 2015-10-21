@@ -28,7 +28,7 @@ public protocol ObservableCollectionType {
     func observe() -> SignalProducer<(Collection, SignalProducer<CollectionEvent<Collection>, NoError>), NoError>
 }
 
-public final class ObservableArray<Element>: ObservableCollectionType, MutableCollectionType, MutableSliceable, RangeReplaceableCollectionType {
+public final class ObservableArray<Element>: ObservableCollectionType {
     private var elements: [Element] = []
     private var sinks: Bag<Signal<CollectionEvent<[Element]>, NoError>.Observer> = Bag()
 
@@ -37,9 +37,25 @@ public final class ObservableArray<Element>: ObservableCollectionType, MutableCo
     
     public init() {
     }
-    
-    // Indexable, MutableIndexable
 
+    public var collection: [Element] {
+        return elements
+    }
+    
+    public func observe() -> SignalProducer<(Collection, SignalProducer<CollectionEvent<Collection>, NoError>), NoError> {
+        return SignalProducer { observer, disposable in
+            let (producer, sink) = SignalProducer<CollectionEvent<Collection>, NoError>.buffer()
+            
+            observer.sendNext((self.elements, producer))
+            let token = self.sinks.insert(sink)
+            disposable.addDisposable {
+                self.sinks.removeValueForToken(token)
+            }
+        }
+    }
+}
+
+extension ObservableArray:  MutableCollectionType {
     public var startIndex: Int {
         return elements.startIndex
     }
@@ -56,15 +72,13 @@ public final class ObservableArray<Element>: ObservableCollectionType, MutableCo
             replaceRange(index..<index, with: [newValue])
         }
     }
-    
-    // SequenceType
-    
+
     public func generate() -> Generator {
         return elements.generate()
     }
-    
-    // RangeReplaceableCollectionType
+}
 
+extension ObservableArray: RangeReplaceableCollectionType {
     public func replaceRange<C : CollectionType where C.Generator.Element == Generator.Element>(subRange: Range<Int>, with newElements: C) {
         let removes: [CollectionEvent<Collection>] = subRange.map { .Remove(self.elements[$0], subRange.startIndex) }
         let inserts: [CollectionEvent<Collection>] = newElements.enumerate().map { .Insert($1, $0 + subRange.startIndex) }
@@ -82,23 +96,5 @@ public final class ObservableArray<Element>: ObservableCollectionType, MutableCo
         // TODO this should be more effecient than copy-on-write
         elements.replaceRange(subRange, with: newElements)
         sinks.forEach { $0.sendNext(change) }
-    }
-
-    // ObservableCollectionType
-
-    public var collection: [Element] {
-        return elements
-    }
-
-    public func observe() -> SignalProducer<(Collection, SignalProducer<CollectionEvent<Collection>, NoError>), NoError> {
-        return SignalProducer { observer, disposable in
-            let (producer, sink) = SignalProducer<CollectionEvent<Collection>, NoError>.buffer()
-            
-            observer.sendNext((self.elements, producer))
-            let token = self.sinks.insert(sink)
-            disposable.addDisposable {
-                self.sinks.removeValueForToken(token)
-            }
-        }
     }
 }
