@@ -43,17 +43,25 @@ public final class ObservableArray<Element>: ObservableCollectionType {
     public func observe() -> ObserveProducer {
         return SignalProducer { observer, disposable in
             let (producer, sink) = ChangesProducer.buffer()
+            var token: RemovalToken!
 
-            observer.sendNext((self.elements, producer))
-            let token = self.sinks.insert(sink)
+            self.sinks.modify { (var sinks) in
+                token = sinks.insert(sink)
+                observer.sendNext((self.elements, producer))
+                return sinks
+            }
+
             disposable.addDisposable {
-                self.sinks.removeValueForToken(token)
+                self.sinks.modify { (var sinks) in
+                    sinks.removeValueForToken(token)
+                    return sinks
+                }
             }
         }
     }
 
     private var elements: [Element] = []
-    private var sinks: Bag<ChangesProducer.ProducedSignal.Observer> = Bag()
+    private var sinks: Atomic<Bag<ChangesProducer.ProducedSignal.Observer>> = Atomic(Bag())
 }
 
 extension ObservableArray:  MutableCollectionType {
@@ -94,8 +102,9 @@ extension ObservableArray: RangeReplaceableCollectionType {
             change = .Composite(removes + inserts)
         }
 
-        // TODO this should be more effecient than copy-on-write
-        elements.replaceRange(subRange, with: newElements)
-        sinks.forEach { $0.sendNext(change) }
+        sinks.withValue {
+            self.elements.replaceRange(subRange, with: newElements)
+            $0.forEach { $0.sendNext(change) }
+        }
     }
 }
