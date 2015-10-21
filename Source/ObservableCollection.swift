@@ -29,23 +29,21 @@ public protocol ObservableCollectionType {
 }
 
 public final class ObservableArray<Element>: ObservableCollectionType {
-    private var elements: [Element] = []
-    private var sinks: Bag<Signal<CollectionEvent<[Element]>, NoError>.Observer> = Bag()
+    public typealias CollectionChange = CollectionEvent<[Element]>
+    public typealias ChangesProducer = SignalProducer<CollectionChange, NoError>
+    public typealias ObserveProducer = SignalProducer<([Element], ChangesProducer), NoError>
 
-    public typealias Collection = [Element]
-    public typealias Generator = Array<Element>.Generator
-    
     public init() {
     }
 
     public var collection: [Element] {
         return elements
     }
-    
-    public func observe() -> SignalProducer<(Collection, SignalProducer<CollectionEvent<Collection>, NoError>), NoError> {
+
+    public func observe() -> ObserveProducer {
         return SignalProducer { observer, disposable in
-            let (producer, sink) = SignalProducer<CollectionEvent<Collection>, NoError>.buffer()
-            
+            let (producer, sink) = ChangesProducer.buffer()
+
             observer.sendNext((self.elements, producer))
             let token = self.sinks.insert(sink)
             disposable.addDisposable {
@@ -53,6 +51,9 @@ public final class ObservableArray<Element>: ObservableCollectionType {
             }
         }
     }
+
+    private var elements: [Element] = []
+    private var sinks: Bag<ChangesProducer.ProducedSignal.Observer> = Bag()
 }
 
 extension ObservableArray:  MutableCollectionType {
@@ -73,17 +74,17 @@ extension ObservableArray:  MutableCollectionType {
         }
     }
 
-    public func generate() -> Generator {
+    public func generate() -> Array<Element>.Generator {
         return elements.generate()
     }
 }
 
 extension ObservableArray: RangeReplaceableCollectionType {
-    public func replaceRange<C : CollectionType where C.Generator.Element == Generator.Element>(subRange: Range<Int>, with newElements: C) {
-        let removes: [CollectionEvent<Collection>] = subRange.map { .Remove(self.elements[$0], subRange.startIndex) }
-        let inserts: [CollectionEvent<Collection>] = newElements.enumerate().map { .Insert($1, $0 + subRange.startIndex) }
+    public func replaceRange<C : CollectionType where C.Generator.Element == Element>(subRange: Range<Int>, with newElements: C) {
+        let removes: [CollectionChange] = subRange.map { .Remove(self.elements[$0], subRange.startIndex) }
+        let inserts: [CollectionChange] = newElements.enumerate().map { .Insert($1, $0 + subRange.startIndex) }
         
-        let change: CollectionEvent<Collection>
+        let change: CollectionChange
         switch (removes.count, inserts.count) {
         case (0, 1):
             change = inserts[0]
