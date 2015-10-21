@@ -8,21 +8,21 @@
 
 import ReactiveCocoa
 
-public enum CollectionEvent<Element> {
-    case Insert(Element, Int)
-    case Remove(Element, Int)
+public enum CollectionEvent<Collection: CollectionType> {
+    case Insert(Collection.Generator.Element, Collection.Index)
+    case Remove(Collection.Generator.Element, Collection.Index)
     case Composite([CollectionEvent])
 }
 
 public protocol ObservableCollectionType: CollectionType {
     typealias Collection: CollectionType
 
-    func observe() -> SignalProducer<(Collection, SignalProducer<CollectionEvent<Collection.Generator.Element>, NoError>), NoError>
+    func observe() -> SignalProducer<(Collection, SignalProducer<CollectionEvent<Collection>, NoError>), NoError>
 }
 
 public final class ObservableArray<Element>: MutableCollectionType, MutableSliceable, RangeReplaceableCollectionType {
     private var elements: [Element] = []
-    private var sinks: Bag<Signal<CollectionEvent<Element>, NoError>.Observer> = Bag()
+    private var sinks: Bag<Signal<CollectionEvent<[Element]>, NoError>.Observer> = Bag()
 
     public typealias Collection = [Element]
     public typealias Generator = Array<Element>.Generator
@@ -58,10 +58,10 @@ public final class ObservableArray<Element>: MutableCollectionType, MutableSlice
     // RangeReplaceableCollectionType
 
     public func replaceRange<C : CollectionType where C.Generator.Element == Generator.Element>(subRange: Range<Int>, with newElements: C) {
-        let removes: [CollectionEvent<Element>] = subRange.map { .Remove(self.elements[$0], subRange.startIndex) }
-        let inserts: [CollectionEvent<Element>] = newElements.enumerate().map { .Insert($1, $0 + subRange.startIndex) }
+        let removes: [CollectionEvent<Collection>] = subRange.map { .Remove(self.elements[$0], subRange.startIndex) }
+        let inserts: [CollectionEvent<Collection>] = newElements.enumerate().map { .Insert($1, $0 + subRange.startIndex) }
         
-        let change: CollectionEvent<Element>
+        let change: CollectionEvent<Collection>
         switch (removes.count, inserts.count) {
         case (0, 1):
             change = inserts[0]
@@ -78,9 +78,9 @@ public final class ObservableArray<Element>: MutableCollectionType, MutableSlice
 
     // ObservableCollectionType
     
-    public func observe() -> SignalProducer<(Collection, SignalProducer<CollectionEvent<Element>, NoError>), NoError> {
+    public func observe() -> SignalProducer<(Collection, SignalProducer<CollectionEvent<Collection>, NoError>), NoError> {
         return SignalProducer { observer, disposable in
-            let (producer, sink) = SignalProducer<CollectionEvent<Element>, NoError>.buffer()
+            let (producer, sink) = SignalProducer<CollectionEvent<Collection>, NoError>.buffer()
             
             observer.sendNext((self.elements, producer))
             let token = self.sinks.insert(sink)
