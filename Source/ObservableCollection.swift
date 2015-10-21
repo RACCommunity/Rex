@@ -20,7 +20,7 @@ public protocol ObservableCollectionType: CollectionType {
     func observe() -> SignalProducer<(Collection, SignalProducer<CollectionEvent<Collection>, NoError>), NoError>
 }
 
-public final class ObservableArray<Element>: MutableCollectionType, MutableSliceable, RangeReplaceableCollectionType {
+public final class ObservableArray<Element>: ObservableCollectionType, MutableCollectionType, MutableSliceable, RangeReplaceableCollectionType {
     private var elements: [Element] = []
     private var sinks: Bag<Signal<CollectionEvent<[Element]>, NoError>.Observer> = Bag()
 
