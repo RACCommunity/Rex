@@ -28,6 +28,22 @@ extension CollectionEvent: CustomStringConvertible {
     }
 }
 
+public func == <C: CollectionType where C.Generator.Element: Equatable>(lhs: CollectionEvent<C>, rhs: CollectionEvent<C>) -> Bool {
+    switch (lhs, rhs) {
+    case let (.Insert(leftElement, leftIndex), .Insert(rightElement, rightIndex)):
+        return leftElement == rightElement && leftIndex == rightIndex
+    case let (.Remove(leftElement, leftIndex), .Remove(rightElement, rightIndex)):
+        return leftElement == rightElement && leftIndex == rightIndex
+    case let (.Composite(left), .Composite(right)):
+        if left.count == right.count {
+            return zip(left, right).map { $0 == $1 }.reduce(true) { $0 && $1 }
+        }
+        return false
+    default:
+        return false
+    }
+}
+
 public protocol ObservableCollectionType {
     typealias Collection: CollectionType
 
