@@ -8,19 +8,43 @@
 
 import ReactiveCocoa
 
+/// Focus on an element and it's index over a collection of items.
+public struct Cursor<Collection: CollectionType> {
+    public let element: Collection.Generator.Element
+    public let index: Collection.Index
+}
+
+extension Cursor: CustomStringConvertible {
+    public var description: String {
+        return "\(element) @\(index)"
+    }
+}
+
+public func == <C: CollectionType where C.Generator.Element: Equatable>(lhs: Cursor<C>, rhs: Cursor<C>) -> Bool {
+    return lhs.index == rhs.index && lhs.element == rhs.element
+}
+
 public enum CollectionEvent<Collection: CollectionType> {
-    case Insert(Collection.Generator.Element, Collection.Index)
-    case Remove(Collection.Generator.Element, Collection.Index)
+    case Insert(Cursor<Collection>)
+    case Remove(Cursor<Collection>)
     case Composite([CollectionEvent])
+    
+    public static func insert(element: Collection.Generator.Element, _ index: Collection.Index) -> CollectionEvent {
+        return .Insert(Cursor(element: element, index: index))
+    }
+
+    public static func remove(element: Collection.Generator.Element, _ index: Collection.Index) -> CollectionEvent {
+        return .Remove(Cursor(element: element, index: index))
+    }
 }
 
 extension CollectionEvent: CustomStringConvertible {
     public var description: String {
         switch self {
-        case let .Insert(element, index):
-            return "INSERT: \(element) @\(index)"
-        case let .Remove(element, index):
-            return "REMOVE: \(element) @\(index)"
+        case let .Insert(cursor):
+            return "INSERT: \(cursor)"
+        case let .Remove(cursor):
+            return "REMOVE: \(cursor)"
         case let .Composite(changes):
             let joined = changes.map { "<\($0.description)>" }.joinWithSeparator(", ")
             return "{ \(joined) }"
@@ -30,10 +54,10 @@ extension CollectionEvent: CustomStringConvertible {
 
 public func == <C: CollectionType where C.Generator.Element: Equatable>(lhs: CollectionEvent<C>, rhs: CollectionEvent<C>) -> Bool {
     switch (lhs, rhs) {
-    case let (.Insert(leftElement, leftIndex), .Insert(rightElement, rightIndex)):
-        return leftElement == rightElement && leftIndex == rightIndex
-    case let (.Remove(leftElement, leftIndex), .Remove(rightElement, rightIndex)):
-        return leftElement == rightElement && leftIndex == rightIndex
+    case let (.Insert(left), .Insert(right)):
+        return left == right
+    case let (.Remove(left), .Remove(right)):
+        return left == right
     case let (.Composite(left), .Composite(right)):
         if left.count == right.count {
             return zip(left, right).map { $0 == $1 }.reduce(true) { $0 && $1 }
@@ -119,8 +143,8 @@ extension ObservableArray:  MutableCollectionType {
 
 extension ObservableArray: RangeReplaceableCollectionType {
     public func replaceRange<C : CollectionType where C.Generator.Element == Element>(subRange: Range<Int>, with newElements: C) {
-        let removes: [CollectionChange] = subRange.map { .Remove(self.elements[$0], subRange.startIndex) }
-        let inserts: [CollectionChange] = newElements.enumerate().map { .Insert($1, $0 + subRange.startIndex) }
+        let removes: [CollectionChange] = subRange.map { .remove(self.elements[$0], subRange.startIndex) }
+        let inserts: [CollectionChange] = newElements.enumerate().map { .insert($1, $0 + subRange.startIndex) }
         
         let change: CollectionChange
         switch (removes.count, inserts.count) {
