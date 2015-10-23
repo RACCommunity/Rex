@@ -14,6 +14,20 @@ public enum CollectionEvent<Collection: CollectionType> {
     case Composite([CollectionEvent])
 }
 
+extension CollectionEvent: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case let .Insert(element, index):
+            return "INSERT: \(element) @\(index)"
+        case let .Remove(element, index):
+            return "REMOVE: \(element) @\(index)"
+        case let .Composite(changes):
+            let joined = changes.map { "<\($0.description)>" }.joinWithSeparator(", ")
+            return "{ \(joined) }"
+        }
+    }
+}
+
 public protocol ObservableCollectionType {
     typealias Collection: CollectionType
 
