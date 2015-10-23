@@ -11,11 +11,11 @@ public enum CollectionEvent<Collection: CollectionType> {
     case Remove(Cursor<Collection>)
     case Composite([CollectionEvent])
     
-    public static func insert(element: Collection.Generator.Element, _ index: Collection.Index) -> CollectionEvent {
+    public static func insert(element: Collection.Generator.Element, at index: Collection.Index) -> CollectionEvent {
         return .Insert(Cursor(element: element, index: index))
     }
-    
-    public static func remove(element: Collection.Generator.Element, _ index: Collection.Index) -> CollectionEvent {
+
+    public static func remove(element: Collection.Generator.Element, at index: Collection.Index) -> CollectionEvent {
         return .Remove(Cursor(element: element, index: index))
     }
 }

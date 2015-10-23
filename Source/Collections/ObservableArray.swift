@@ -69,8 +69,8 @@ extension ObservableArray:  MutableCollectionType {
 
 extension ObservableArray: RangeReplaceableCollectionType {
     public func replaceRange<C : CollectionType where C.Generator.Element == Element>(subRange: Range<Int>, with newElements: C) {
-        let removes: [CollectionChange] = subRange.map { .remove(self.elements[$0], subRange.startIndex) }
-        let inserts: [CollectionChange] = newElements.enumerate().map { .insert($1, $0 + subRange.startIndex) }
+        let removes: [CollectionChange] = subRange.map { .remove(self.elements[$0], at: subRange.startIndex) }
+        let inserts: [CollectionChange] = newElements.enumerate().map { .insert($1, at: $0 + subRange.startIndex) }
         
         let change: CollectionChange
         switch (removes.count, inserts.count) {

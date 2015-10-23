@@ -21,4 +21,3 @@ public protocol ObservableCollectionType {
     /// Safely subscribe to changes on `collection`.
     func observe() -> SignalProducer<(Collection, SignalProducer<CollectionEvent<Collection>, NoError>), NoError>
 }
-
