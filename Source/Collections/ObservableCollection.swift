@@ -8,22 +8,6 @@
 
 import ReactiveCocoa
 
-/// Focus on an element and it's index over a collection of items.
-public struct Cursor<Collection: CollectionType> {
-    public let element: Collection.Generator.Element
-    public let index: Collection.Index
-}
-
-extension Cursor: CustomStringConvertible {
-    public var description: String {
-        return "\(element) @\(index)"
-    }
-}
-
-public func == <C: CollectionType where C.Generator.Element: Equatable>(lhs: Cursor<C>, rhs: Cursor<C>) -> Bool {
-    return lhs.index == rhs.index && lhs.element == rhs.element
-}
-
 public enum CollectionEvent<Collection: CollectionType> {
     case Insert(Cursor<Collection>)
     case Remove(Cursor<Collection>)
