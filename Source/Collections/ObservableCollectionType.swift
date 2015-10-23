@@ -1,5 +1,5 @@
 //
-//  Query.swift
+//  ObservableCollectionType.swift
 //  Rex
 //
 //  Created by Neil Pankey on 10/20/15.
