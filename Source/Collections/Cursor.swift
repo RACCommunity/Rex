@@ -10,6 +10,11 @@
 public struct Cursor<Collection: CollectionType> {
     public let element: Collection.Generator.Element
     public let index: Collection.Index
+    
+    public init(element: Collection.Generator.Element, index: Collection.Index) {
+        self.element = element
+        self.index = index
+    }
 }
 
 extension Cursor: CustomStringConvertible {
