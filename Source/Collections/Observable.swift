@@ -11,8 +11,6 @@ import ReactiveCocoa
 /// Represents an observable environment. This is essentially RAC's `PropertyType` when
 /// `State` and `Patch` are equivalent. This model can provide more efficiency for composite
 /// types (e.g. collections) since you can reify smaller changes without cloning.
-///
-/// N.B. This should subsume ObservableCollectionType
 public protocol Observable {
     typealias State: Patchable
 
