@@ -38,8 +38,6 @@
 		D83457411AFEE6050070616A /* SignalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8003EBE1AFED2F800D7D3C5 /* SignalTests.swift */; };
 		D834AEB61BDAF90B00277B07 /* Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D834AEB51BDAF90B00277B07 /* Cursor.swift */; };
 		D834AEB71BDAF90B00277B07 /* Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D834AEB51BDAF90B00277B07 /* Cursor.swift */; };
-		D834AEB91BDAF93900277B07 /* CollectionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D834AEB81BDAF93900277B07 /* CollectionEvent.swift */; };
-		D834AEBA1BDAF93900277B07 /* CollectionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D834AEB81BDAF93900277B07 /* CollectionEvent.swift */; };
 		D834AEBC1BDAF9EB00277B07 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D834AEBB1BDAF9EB00277B07 /* ObservableArray.swift */; };
 		D834AEBD1BDAF9EB00277B07 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D834AEBB1BDAF9EB00277B07 /* ObservableArray.swift */; };
 		D834AEC01BDAFC5900277B07 /* ObservableArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D834AEBF1BDAFC5900277B07 /* ObservableArrayTests.swift */; };
@@ -141,7 +139,6 @@
 		D8003EC91AFEE3ED00D7D3C5 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = "<group>"; };
 		D8003ECA1AFEE3ED00D7D3C5 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Result.framework; sourceTree = "<group>"; };
 		D834AEB51BDAF90B00277B07 /* Cursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cursor.swift; sourceTree = "<group>"; };
-		D834AEB81BDAF93900277B07 /* CollectionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionEvent.swift; sourceTree = "<group>"; };
 		D834AEBB1BDAF9EB00277B07 /* ObservableArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
 		D834AEBF1BDAFC5900277B07 /* ObservableArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableArrayTests.swift; sourceTree = "<group>"; };
 		D86E77A91AFEE646004BF23D /* Rex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Rex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -304,7 +301,6 @@
 			isa = PBXGroup;
 			children = (
 				D87DB2241BDBB73100894F74 /* Change.swift */,
-				D834AEB81BDAF93900277B07 /* CollectionEvent.swift */,
 				D834AEB51BDAF90B00277B07 /* Cursor.swift */,
 				D87DB2271BDBB7AC00894F74 /* Delta.swift */,
 				D87DB22A1BDBBCF800894F74 /* Observable.swift */,
@@ -548,7 +544,6 @@
 				D87DB22B1BDBBCF800894F74 /* Observable.swift in Sources */,
 				D87DB2281BDBB7AC00894F74 /* Delta.swift in Sources */,
 				D834AEBC1BDAF9EB00277B07 /* ObservableArray.swift in Sources */,
-				D834AEB91BDAF93900277B07 /* CollectionEvent.swift in Sources */,
 				D86FFBDA1B34B3F0001A89B3 /* Action.swift in Sources */,
 				D87DB22E1BDBC5EF00894F74 /* Queryable.swift in Sources */,
 				D87DB2251BDBB73100894F74 /* Change.swift in Sources */,
@@ -596,7 +591,6 @@
 				D87DB2351BDBCC8300894F74 /* PatchableArray.swift in Sources */,
 				D834572E1AFEE45B0070616A /* SignalProducer.swift in Sources */,
 				D834AEBD1BDAF9EB00277B07 /* ObservableArray.swift in Sources */,
-				D834AEBA1BDAF93900277B07 /* CollectionEvent.swift in Sources */,
 				8289A2E51BD7F6DD0097FB60 /* UIView.swift in Sources */,
 				D86FFBD61B34B116001A89B3 /* UIControl.swift in Sources */,
 				D8F0973F1B17F31E002E15BA /* NSData.swift in Sources */,

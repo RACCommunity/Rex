@@ -11,6 +11,16 @@
 public enum Change<T> {
     case Assert(T)
     case Retract(T)
+
+    /// Insert in-place semantics for collections.
+    public static func insert<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> Change<Cursor<C>> {
+        return .Assert(Cursor(element: element, index: index))
+    }
+
+    /// Remove in-place semantics for collections.
+    public static func remove<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> Change<Cursor<C>> {
+        return .Retract(Cursor(element: element, index: index))
+    }
 }
 
 public func == <T: Equatable>(lhs: Change<T>, rhs: Change<T>) -> Bool {

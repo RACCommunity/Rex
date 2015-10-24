@@ -18,12 +18,12 @@ public enum Delta<T> {
 
     /// Insert in-place semantics for collections.
     public static func insert<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> Delta<Cursor<C>> {
-        return .Single(.Assert(Cursor(element: element, index: index)))
+        return .Single(.insert(element, atIndex: index))
     }
     
     /// Remove in-place semantics for collections.
     public static func remove<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> Delta<Cursor<C>> {
-        return .Single(.Retract(Cursor(element: element, index: index)))
+        return .Single(.remove(element, atIndex: index))
     }
 }
 

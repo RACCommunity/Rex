@@ -14,10 +14,9 @@ import ReactiveCocoa
 ///
 /// N.B. This should subsume ObservableCollectionType
 public protocol Observable {
-    typealias State
-    typealias Patch
+    typealias State: Patchable
 
     var state: State { get }
 
-    func observe() -> SignalProducer<(State, SignalProducer<Patch, NoError>), NoError>
+    func observe() -> SignalProducer<(State, SignalProducer<State.Patch, NoError>), NoError>
 }

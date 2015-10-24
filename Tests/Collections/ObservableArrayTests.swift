@@ -13,22 +13,22 @@ class ObservableArrayTests: XCTestCase {
 
     func testObservation() {
         var array = ObservableArray<Int>()
-        var change: CollectionEvent<[Int]>!
+        var patch: Delta<Cursor<[Int]>>!
 
-        array.observe().startWithNext { _, changes in
-            changes.startWithNext { change = $0 }
+        array.observe().startWithNext { _, patches in
+            patches.startWithNext { patch = $0 }
         }
 
         array.insert(5, atIndex: 0)
-        XCTAssert(change == .insert(5, at: 0))
+        XCTAssert(patch == .insert(5, atIndex: 0))
 
         array.insert(0, atIndex: 1)
-        XCTAssert(change == .insert(0, at: 1))
+        XCTAssert(patch == .insert(0, atIndex: 1))
 
         array.replaceRange(1..<1, with: [4, 3, 2])
-        XCTAssert(change == .Composite([.insert(4, at: 1), .insert(3, at: 2), .insert(2, at: 3)]))
+        XCTAssert(patch == .Batch([.insert(4, atIndex: 1), .insert(3, atIndex: 2), .insert(2, atIndex: 3)]))
 
-        array.removeAtIndex(2)
-        XCTAssert(change == .remove(3, at: 2))
+        array.removeAtIndex(0)
+        XCTAssert(patch == .remove(5, atIndex: 0))
     }
 }

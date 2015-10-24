@@ -9,9 +9,9 @@
 import ReactiveCocoa
 
 public final class ObservableArray<Element>: Observable {
-    public typealias CollectionChange = CollectionEvent<[Element]>
-    public typealias ChangesProducer = SignalProducer<CollectionChange, NoError>
-    public typealias ObserveProducer = SignalProducer<([Element], ChangesProducer), NoError>
+    public typealias State = Array<Element>
+    public typealias PatchProducer = SignalProducer<State.Patch, NoError>
+    public typealias ObserveProducer = SignalProducer<(State, PatchProducer), NoError>
     
     public init() {
     }
@@ -22,7 +22,7 @@ public final class ObservableArray<Element>: Observable {
     
     public func observe() -> ObserveProducer {
         return SignalProducer { observer, disposable in
-            let (producer, sink) = ChangesProducer.buffer()
+            let (producer, sink) = PatchProducer.buffer()
             var token: RemovalToken!
             
             self.sinks.modify { (var sinks) in
@@ -41,7 +41,7 @@ public final class ObservableArray<Element>: Observable {
     }
     
     private var elements: [Element] = []
-    private var sinks: Atomic<Bag<ChangesProducer.ProducedSignal.Observer>> = Atomic(Bag())
+    private var sinks: Atomic<Bag<PatchProducer.ProducedSignal.Observer>> = Atomic(Bag())
 }
 
 extension ObservableArray:  MutableCollectionType {
@@ -69,17 +69,20 @@ extension ObservableArray:  MutableCollectionType {
 
 extension ObservableArray: RangeReplaceableCollectionType {
     public func replaceRange<C : CollectionType where C.Generator.Element == Element>(subRange: Range<Int>, with newElements: C) {
-        let removes: [CollectionChange] = subRange.map { .remove(self.elements[$0], at: subRange.startIndex) }
-        let inserts: [CollectionChange] = newElements.enumerate().map { .insert($1, at: $0 + subRange.startIndex) }
-        
-        let change: CollectionChange
-        switch (removes.count, inserts.count) {
+        let change: Delta<State.Focus>
+        switch (subRange.count, newElements.count) {
         case (0, 1):
-            change = inserts[0]
+            change = .insert(newElements.first!, atIndex: subRange.startIndex)
         case (1, 0):
-            change = removes[0]
+            change = .remove(elements[subRange.startIndex], atIndex: subRange.startIndex)
         default:
-            change = .Composite(removes + inserts)
+            let removes: [Change<State.Focus>] = subRange.map {
+                .Retract(Cursor(element: self.elements[$0], index: subRange.startIndex))
+            }
+            let inserts: [Change<State.Focus>] = newElements.enumerate().map {
+                .Assert(Cursor(element: $1, index: $0 + subRange.startIndex))
+            }
+            change = .Batch(removes + inserts)
         }
         
         sinks.withValue {
