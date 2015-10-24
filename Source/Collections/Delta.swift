@@ -15,4 +15,43 @@ public enum Delta<T> {
     case Batch([Change<T>])
     // TODO: Is a tree of changes useful?
     // case Composite([Delta<T>])
+
+    /// Insert in-place semantics for collections.
+    public static func insert<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> Delta<Cursor<C>> {
+        return .Single(.Assert(Cursor(element: element, index: index)))
+    }
+    
+    /// Remove in-place semantics for collections.
+    public static func remove<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> Delta<Cursor<C>> {
+        return .Single(.Retract(Cursor(element: element, index: index)))
+    }
 }
+
+public func == <T: Equatable>(lhs: Delta<T>, rhs: Delta<T>) -> Bool {
+    switch (lhs, rhs) {
+    case let (.Single(left), .Single(right)):
+        return left == right
+    case let (.Batch(left), .Batch(right)):
+        if left.count == right.count {
+            return zip(left, right).map { $0 == $1 }.reduce(true) { $0 && $1 }
+        }
+        return false
+    default:
+        return false
+    }
+}
+
+public func == <C: CollectionType where C.Generator.Element: Equatable>(lhs: Delta<Cursor<C>>, rhs: Delta<Cursor<C>>) -> Bool {
+    switch (lhs, rhs) {
+    case let (.Single(left), .Single(right)):
+        return left == right
+    case let (.Batch(left), .Batch(right)):
+        if left.count == right.count {
+            return zip(left, right).map { $0 == $1 }.reduce(true) { $0 && $1 }
+        }
+        return false
+    default:
+        return false
+    }
+}
+
