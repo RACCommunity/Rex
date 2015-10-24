@@ -8,7 +8,7 @@
 
 import ReactiveCocoa
 
-public final class ObservableArray<Element>: ObservableCollectionType {
+public final class ObservableArray<Element>: Observable {
     public typealias CollectionChange = CollectionEvent<[Element]>
     public typealias ChangesProducer = SignalProducer<CollectionChange, NoError>
     public typealias ObserveProducer = SignalProducer<([Element], ChangesProducer), NoError>
@@ -16,7 +16,7 @@ public final class ObservableArray<Element>: ObservableCollectionType {
     public init() {
     }
     
-    public var collection: [Element] {
+    public var state: [Element] {
         return elements
     }
     

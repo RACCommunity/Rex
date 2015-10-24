@@ -44,8 +44,6 @@
 		D834AEBD1BDAF9EB00277B07 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D834AEBB1BDAF9EB00277B07 /* ObservableArray.swift */; };
 		D834AEC01BDAFC5900277B07 /* ObservableArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D834AEBF1BDAFC5900277B07 /* ObservableArrayTests.swift */; };
 		D834AEC11BDAFC5900277B07 /* ObservableArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D834AEBF1BDAFC5900277B07 /* ObservableArrayTests.swift */; };
-		D84E13FE1BD65308008EB388 /* ObservableCollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E13FD1BD65308008EB388 /* ObservableCollectionType.swift */; };
-		D84E13FF1BD65308008EB388 /* ObservableCollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E13FD1BD65308008EB388 /* ObservableCollectionType.swift */; };
 		D86FFBD11B34AD6F001A89B3 /* Association.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86FFBD01B34AD6F001A89B3 /* Association.swift */; };
 		D86FFBD21B34AD7A001A89B3 /* Association.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86FFBD01B34AD6F001A89B3 /* Association.swift */; };
 		D86FFBD61B34B116001A89B3 /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86FFBD41B34B0FE001A89B3 /* UIControl.swift */; };
@@ -140,7 +138,6 @@
 		D834AEB81BDAF93900277B07 /* CollectionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionEvent.swift; sourceTree = "<group>"; };
 		D834AEBB1BDAF9EB00277B07 /* ObservableArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
 		D834AEBF1BDAFC5900277B07 /* ObservableArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableArrayTests.swift; sourceTree = "<group>"; };
-		D84E13FD1BD65308008EB388 /* ObservableCollectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableCollectionType.swift; sourceTree = "<group>"; };
 		D86E77A91AFEE646004BF23D /* Rex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Rex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86E77AA1AFEE646004BF23D /* RexTests-Mac.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RexTests-Mac.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86E77AB1AFEE646004BF23D /* Rex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Rex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -303,7 +300,6 @@
 				D87DB2271BDBB7AC00894F74 /* Delta.swift */,
 				D87DB22A1BDBBCF800894F74 /* Observable.swift */,
 				D834AEBB1BDAF9EB00277B07 /* ObservableArray.swift */,
-				D84E13FD1BD65308008EB388 /* ObservableCollectionType.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -541,7 +537,6 @@
 				D87DB2281BDBB7AC00894F74 /* Delta.swift in Sources */,
 				D834AEBC1BDAF9EB00277B07 /* ObservableArray.swift in Sources */,
 				D834AEB91BDAF93900277B07 /* CollectionEvent.swift in Sources */,
-				D84E13FE1BD65308008EB388 /* ObservableCollectionType.swift in Sources */,
 				D86FFBDA1B34B3F0001A89B3 /* Action.swift in Sources */,
 				D87DB2251BDBB73100894F74 /* Change.swift in Sources */,
 				D86FFBD11B34AD6F001A89B3 /* Association.swift in Sources */,
@@ -580,7 +575,6 @@
 				D834572D1AFEE45B0070616A /* Signal.swift in Sources */,
 				D8E4A6211B7BBB2100EAD8A8 /* UIBarItem.swift in Sources */,
 				D87DB2291BDBB7AC00894F74 /* Delta.swift in Sources */,
-				D84E13FF1BD65308008EB388 /* ObservableCollectionType.swift in Sources */,
 				D8E4A6201B7BBB1600EAD8A8 /* UIBarButtonItem.swift in Sources */,
 				D8F097451B17F3C8002E15BA /* NSObject.swift in Sources */,
 				D834572E1AFEE45B0070616A /* SignalProducer.swift in Sources */,
