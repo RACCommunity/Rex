@@ -13,8 +13,6 @@ public enum Delta<T> {
     /// An atomic, ordered list of changes (may be empty). Can be used for things
     /// like setters, or move/replace in a container context.
     case Batch([Change<T>])
-    // TODO: Is a tree of changes useful?
-    // case Composite([Delta<T>])
 
     /// Insert in-place semantics for collections.
     public static func insert<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> Delta<Cursor<C>> {
