@@ -6,26 +6,16 @@
 //  Copyright © 2015 Neil Pankey. All rights reserved.
 //
 
-/// Composing atomic changes from assertions and retractions.
+/// Atomic unit(s) of change supporting composition.
 public enum Delta<T> {
-    /// An atomic unit of change.
-    case Single(Change<T>)
-    /// An atomic, ordered list of changes (may be empty). Can be used for things
+    /// An single unit of change.
+    case Single(T)
+    /// An ordered list of changes (may be empty). Can be used for things
     /// like setters, or move/replace in a container context.
-    case Batch([Change<T>])
-
-    /// Insert in-place semantics for collections.
-    public static func insert<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> Delta<Cursor<C>> {
-        return .Single(.insert(element, atIndex: index))
-    }
-    
-    /// Remove in-place semantics for collections.
-    public static func remove<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> Delta<Cursor<C>> {
-        return .Single(.remove(element, atIndex: index))
-    }
+    case Batch([T])
 }
 
-public func == <T: Equatable>(lhs: Delta<T>, rhs: Delta<T>) -> Bool {
+public func == <T: Equatable>(lhs: Delta<Change<T>>, rhs: Delta<Change<T>>) -> Bool {
     switch (lhs, rhs) {
     case let (.Single(left), .Single(right)):
         return left == right
@@ -39,7 +29,7 @@ public func == <T: Equatable>(lhs: Delta<T>, rhs: Delta<T>) -> Bool {
     }
 }
 
-public func == <C: CollectionType where C.Generator.Element: Equatable>(lhs: Delta<Cursor<C>>, rhs: Delta<Cursor<C>>) -> Bool {
+public func == <C: CollectionType where C.Generator.Element: Equatable>(lhs: Delta<CollectionChange<C>>, rhs: Delta<CollectionChange<C>>) -> Bool {
     switch (lhs, rhs) {
     case let (.Single(left), .Single(right)):
         return left == right

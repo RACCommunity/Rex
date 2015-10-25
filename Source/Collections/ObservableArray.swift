@@ -69,18 +69,18 @@ extension ObservableArray:  MutableCollectionType {
 
 extension ObservableArray: RangeReplaceableCollectionType {
     public func replaceRange<C : CollectionType where C.Generator.Element == Element>(subRange: Range<Int>, with newElements: C) {
-        let change: Delta<State.Focus>
+        let change: Delta<CollectionChange<[Element]>>
         switch (subRange.count, newElements.count) {
         case (0, 1):
-            change = .insert(newElements.first!, atIndex: subRange.startIndex)
+            change = .Single(.insert(newElements.first!, atIndex: subRange.startIndex))
         case (1, 0):
-            change = .remove(elements[subRange.startIndex], atIndex: subRange.startIndex)
+            change = .Single(.remove(elements[subRange.startIndex], atIndex: subRange.startIndex))
         default:
-            let removes: [Change<State.Focus>] = subRange.map {
-                .Retract(Cursor(element: self.elements[$0], index: subRange.startIndex))
+            let removes: [CollectionChange<[Element]>] = subRange.map {
+                .Remove(Cursor(element: self.elements[$0], index: subRange.startIndex))
             }
-            let inserts: [Change<State.Focus>] = newElements.enumerate().map {
-                .Assert(Cursor(element: $1, index: $0 + subRange.startIndex))
+            let inserts: [CollectionChange<[Element]>] = newElements.enumerate().map {
+                .Insert(Cursor(element: $1, index: $0 + subRange.startIndex))
             }
             change = .Batch(removes + inserts)
         }

@@ -7,8 +7,7 @@
 //
 
 extension Array: Patchable {
-    public typealias Focus = Cursor<[Element]>
-    public typealias Patch = Delta<Focus>
+    public typealias Patch = Delta<CollectionChange<[Element]>>
     
     public func apply(patch: Patch) -> Array {
         var clone = self
@@ -25,11 +24,11 @@ extension Array: Patchable {
         return clone
     }
     
-    private mutating func changeInPlace(change: Change<Cursor<[Element]>>) {
+    private mutating func changeInPlace(change: CollectionChange<[Element]>) {
         switch change {
-        case let .Assert(focus):
+        case let .Insert(focus):
             insert(focus.element, atIndex: focus.index)
-        case let .Retract(focus):
+        case let .Remove(focus):
             removeAtIndex(focus.index)
         }
     }

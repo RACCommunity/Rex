@@ -11,16 +11,6 @@
 public enum Change<T> {
     case Assert(T)
     case Retract(T)
-
-    /// Insert in-place semantics for collections.
-    public static func insert<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> Change<Cursor<C>> {
-        return .Assert(Cursor(element: element, index: index))
-    }
-
-    /// Remove in-place semantics for collections.
-    public static func remove<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> Change<Cursor<C>> {
-        return .Retract(Cursor(element: element, index: index))
-    }
 }
 
 public func == <T: Equatable>(lhs: Change<T>, rhs: Change<T>) -> Bool {
@@ -34,11 +24,28 @@ public func == <T: Equatable>(lhs: Change<T>, rhs: Change<T>) -> Bool {
     }
 }
 
-public func == <C: CollectionType where C.Generator.Element: Equatable>(lhs: Change<Cursor<C>>, rhs: Change<Cursor<C>>) -> Bool {
+/// Reified in-place changes for collections. This type is effectively
+/// `Change<Cursor<C>>` but with better naming and simpler use.
+public enum CollectionChange<C: CollectionType> {
+    case Insert(Cursor<C>)
+    case Remove(Cursor<C>)
+
+    /// Insert in-place semantics for collections.
+    public static func insert<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> CollectionChange<C> {
+        return .Insert(Cursor(element: element, index: index))
+    }
+    
+    /// Remove in-place semantics for collections.
+    public static func remove<C: CollectionType>(element: C.Generator.Element, atIndex index: C.Index) -> CollectionChange<C> {
+        return .Remove(Cursor(element: element, index: index))
+    }
+}
+
+public func == <C: CollectionType where C.Generator.Element: Equatable>(lhs: CollectionChange<C>, rhs: CollectionChange<C>) -> Bool {
     switch (lhs, rhs) {
-    case let (.Assert(left), .Assert(right)):
+    case let (.Insert(left), .Insert(right)):
         return left == right
-    case let (.Retract(left), .Retract(right)):
+    case let (.Remove(left), .Remove(right)):
         return left == right
     default:
         return false
