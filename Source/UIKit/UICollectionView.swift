@@ -9,17 +9,20 @@
 import ReactiveCocoa
 import UIKit
 
-public protocol CollectionViewCellType {
-    func configure(collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell
+// Have to resort to inheritance for this one...
+public class CollectionViewCell {
+    func configure(collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
+        fatalError("Must override configure")
+    }
 }
 
 public final class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
-    public typealias PatchProducer = SignalProducer<Delta<CollectionChange<[CollectionViewCellType]>>, NoError>
-    
-    private var cells: [CollectionViewCellType] = []
+    public typealias PatchProducer = SignalProducer<Delta<CollectionChange<[CollectionViewCell]>>, NoError>
+
+    private var cells: [CollectionViewCell] = []
 
     /// Attaches self as the `collectionView`s data source using `producer`
-    public init(collectionView: UICollectionView, producer: SignalProducer<([CollectionViewCellType], PatchProducer), NoError>) {
+    public init(collectionView: UICollectionView, producer: SignalProducer<([CollectionViewCell], PatchProducer), NoError>) {
         super.init()
         collectionView.dataSource = self
 
