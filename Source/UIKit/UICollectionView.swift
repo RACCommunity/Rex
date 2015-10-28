@@ -27,6 +27,8 @@ public final class CollectionViewDataSource: NSObject, UICollectionViewDataSourc
         collectionView.dataSource = self
 
         producer.startWithNext { cells, patches in
+            precondition(collectionView.dataSource === self, "Data source changed!")
+            
             self.cells = cells
             collectionView.reloadData()
 
