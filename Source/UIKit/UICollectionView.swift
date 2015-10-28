@@ -2,38 +2,38 @@
 //  UICollectionView.swift
 //  Rex
 //
-//  Created by Neil Pankey on 10/25/15.
-//  Copyright © 2015 Neil Pankey. All rights reserved.
+//  See https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e
+//
+//  Created by Andy Matuschak on 10/14/14.
+//  Copyright (c) 2014 Khan Academy. All rights reserved.
 //
 
 import ReactiveCocoa
 import UIKit
 
-// Have to resort to inheritance for this one...
-public class CollectionViewCell {
-    func configure(collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
-        fatalError("Must override configure")
-    }
-}
+public final class CollectionViewDataSource<Element>: NSObject, UICollectionViewDataSource {
+    public typealias PatchProducer = SignalProducer<Delta<CollectionChange<[Element]>>, NoError>
+    public typealias ObserveProducer = SignalProducer<([Element], PatchProducer), NoError>
+    public typealias Configure = (Element, UICollectionView, NSIndexPath) -> UICollectionViewCell
 
-public final class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
-    public typealias PatchProducer = SignalProducer<Delta<CollectionChange<[CollectionViewCell]>>, NoError>
-
-    private var cells: [CollectionViewCell] = []
+    private var elements: [Element] = []
+    private var configure: Configure
 
     /// Attaches self as the `collectionView`s data source using `producer`
-    public init(collectionView: UICollectionView, producer: SignalProducer<([CollectionViewCell], PatchProducer), NoError>) {
+    public init(collectionView: UICollectionView, producer: ObserveProducer, configure: Configure) {
+        self.configure = configure
         super.init()
+
         collectionView.dataSource = self
 
-        producer.startWithNext { cells, patches in
+        producer.startWithNext { elements, patches in
             precondition(collectionView.dataSource === self, "Data source changed!")
             
-            self.cells = cells
+            self.elements = elements
             collectionView.reloadData()
 
             patches.startWithNext { patch in
-                self.cells.apply(patch)
+                self.elements.apply(patch)
                 // TODO Inspect the patch
                 collectionView.reloadData()
             }
@@ -41,10 +41,10 @@ public final class CollectionViewDataSource: NSObject, UICollectionViewDataSourc
     }
 
     public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cells.count
+        return elements.count
     }
-    
+
     public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return cells[indexPath.item].configure(collectionView, indexPath: indexPath)
+        return configure(elements[indexPath.item], collectionView, indexPath)
     }
 }
