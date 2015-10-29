@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let flowLayout = UICollectionViewFlowLayout();
-        let collectionView = UICollectionView(frame: CGRectMake(10, 10, 300, 400), collectionViewLayout: flowLayout);
+        let collectionView = UICollectionView(frame: CGRectMake(10, 20, 300, 400), collectionViewLayout: flowLayout);
         collectionView.registerClass(TextCell.self, forCellWithReuseIdentifier: "cell");
         collectionView.backgroundColor = UIColor.cyanColor();
         
@@ -64,7 +64,10 @@ class ViewController: UIViewController {
         view.addSubview(collectionView)
 
         QueueScheduler.mainQueueScheduler.scheduleAfter(NSDate(timeIntervalSinceNow: 2)) {
-            array.replaceRange(1..<2, with: [3, 2, 1, 0])
+            array.replaceRange(1..<3, with: [3, 2, 1, 0])
+        }
+        QueueScheduler.mainQueueScheduler.scheduleAfter(NSDate(timeIntervalSinceNow: 4)) {
+            array.replaceRange(2..<6, with: [9, 10])
         }
     }
 }

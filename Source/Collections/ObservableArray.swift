@@ -77,12 +77,12 @@ extension ObservableArray: RangeReplaceableCollectionType {
             change = .Single(.remove(elements[subRange.startIndex], atIndex: subRange.startIndex))
         default:
             let removes: [CollectionChange<[Element]>] = subRange.map {
-                .Remove(Cursor(element: self.elements[$0], index: subRange.startIndex))
+                .Remove(Cursor(element: self.elements[$0], index: $0))
             }
             let inserts: [CollectionChange<[Element]>] = newElements.enumerate().map {
                 .Insert(Cursor(element: $1, index: $0 + subRange.startIndex))
             }
-            change = .Batch(removes + inserts)
+            change = .Batch(merge(removes, inserts))
         }
         
         sinks.withValue {
@@ -90,4 +90,27 @@ extension ObservableArray: RangeReplaceableCollectionType {
             $0.forEach { $0.sendNext(change) }
         }
     }
+}
+
+/// Similar to `zip` but interleaves the elements into a single collection. Unlike
+/// `zip`, this will exhaust both collections even if they are different sizes.
+private func merge<C: CollectionType where C.Index == Int>(lhs: C, _ rhs: C) -> [C.Generator.Element] {
+    var result: [C.Generator.Element] = []
+    result.reserveCapacity(lhs.count + rhs.count)
+
+    var (leftGenerator, rightGenerator) = (lhs.generate(), rhs.generate())
+    var (leftElement, rightElement) = (leftGenerator.next(), rightGenerator.next())
+    
+    while leftElement != nil || rightElement != nil {
+        if let leftValue = leftElement {
+            result.append(leftValue)
+            leftElement = leftGenerator.next()
+        }
+        if let rightValue = rightElement {
+            result.append(rightValue)
+            rightElement = rightGenerator.next()
+        }
+    }
+    
+    return result
 }
