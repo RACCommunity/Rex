@@ -10,6 +10,28 @@ import UIKit
 import Rex
 import ReactiveCocoa
 
+class TextCell: UICollectionViewCell {
+    private var label: UILabel!
+    
+    var text: String = "" {
+        didSet {
+            label.text = text
+        }
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        label = UILabel(frame: bounds)
+        label.textColor = UIColor.whiteColor()
+        label.textAlignment = .Center
+        self.addSubview(label)
+    }
+}
+
 class ViewController: UIViewController {
 
     var dataSource: CollectionViewDataSource<Int>?
@@ -19,14 +41,16 @@ class ViewController: UIViewController {
 
         let flowLayout = UICollectionViewFlowLayout();
         let collectionView = UICollectionView(frame: CGRectMake(10, 10, 300, 400), collectionViewLayout: flowLayout);
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell");
+        collectionView.registerClass(TextCell.self, forCellWithReuseIdentifier: "cell");
         collectionView.backgroundColor = UIColor.cyanColor();
         
         let array = ObservableArray<Int>()
         array.replaceRange(0..<0, with: [1, 2, 3, 4, 5, 6, 7, 8])
         
         dataSource = CollectionViewDataSource(collectionView: collectionView, producer: array.observe()) { value, collectionView, indexPath in
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath)
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TextCell
+            
+            cell.text = "\(value)"
 
             switch value % 3 {
             case 0: cell.backgroundColor = UIColor.greenColor()
@@ -39,8 +63,8 @@ class ViewController: UIViewController {
 
         view.addSubview(collectionView)
 
-        QueueScheduler.mainQueueScheduler.scheduleAfter(NSDate(timeIntervalSinceNow: 1)) {
-            array.replaceRange(0..<0, with: [3, 2, 1, 0])
+        QueueScheduler.mainQueueScheduler.scheduleAfter(NSDate(timeIntervalSinceNow: 2)) {
+            array.replaceRange(1..<2, with: [3, 2, 1, 0])
         }
     }
 }
