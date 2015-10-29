@@ -7,19 +7,14 @@
 //
 
 extension Array: Patchable {
-    public typealias Patch = Delta<CollectionChange<[Element]>>
+    public typealias Patch = [CollectionChange<[Element]>]
 
     @warn_unused_result
     public func apply(patch: Patch) -> Array {
         var clone = self
 
-        switch patch {
-        case let .Single(change):
+        for change in patch {
             clone.changeInPlace(change)
-        case let .Batch(changes):
-            for change in changes {
-                clone.changeInPlace(change)
-            }
         }
 
         return clone

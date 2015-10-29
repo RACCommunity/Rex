@@ -69,25 +69,18 @@ extension ObservableArray:  MutableCollectionType {
 
 extension ObservableArray: RangeReplaceableCollectionType {
     public func replaceRange<C : CollectionType where C.Generator.Element == Element>(subRange: Range<Int>, with newElements: C) {
-        let change: Delta<CollectionChange<[Element]>>
-        switch (subRange.count, newElements.count) {
-        case (0, 1):
-            change = .Single(.insert(newElements.first!, atIndex: subRange.startIndex))
-        case (1, 0):
-            change = .Single(.remove(elements[subRange.startIndex], atIndex: subRange.startIndex))
-        default:
-            let removes: [CollectionChange<[Element]>] = subRange.map {
-                .Remove(Cursor(element: self.elements[$0], index: $0))
-            }
-            let inserts: [CollectionChange<[Element]>] = newElements.enumerate().map {
-                .Insert(Cursor(element: $1, index: $0 + subRange.startIndex))
-            }
-            change = .Batch(merge(removes, inserts))
+        let patch: [CollectionChange<[Element]>]
+        let removes: [CollectionChange<[Element]>] = subRange.map {
+            .Remove(Cursor(element: self.elements[$0], index: $0))
         }
+        let inserts: [CollectionChange<[Element]>] = newElements.enumerate().map {
+            .Insert(Cursor(element: $1, index: $0 + subRange.startIndex))
+        }
+        patch = merge(removes, inserts)
         
         sinks.withValue {
             self.elements.replaceRange(subRange, with: newElements)
-            $0.forEach { $0.sendNext(change) }
+            $0.forEach { $0.sendNext(patch) }
         }
     }
 }

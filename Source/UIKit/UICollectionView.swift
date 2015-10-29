@@ -12,27 +12,20 @@ import ReactiveCocoa
 import UIKit
 
 extension UICollectionView {
-    public func applyDelta<C: CollectionType where C.Index == Int>(delta: Delta<CollectionChange<C>>) {
-        switch delta {
-        case let .Single(change):
-            applyChange(change)
-        case let .Batch(changes):
-            changes.forEach { applyChange($0) }
-        }
-    }
-    
-    public func applyChange<C: CollectionType where C.Index == Int>(change: CollectionChange<C>) {
-        switch change {
-        case let .Insert(cursor):
-            insertItemsAtIndexPaths([NSIndexPath(forItem: cursor.index, inSection: 0)])
-        case let .Remove(cursor):
-            deleteItemsAtIndexPaths([NSIndexPath(forItem: cursor.index, inSection: 0)])
+    public func applyPatch<C: CollectionType where C.Index == Int>(patch: [CollectionChange<C>]) {
+        patch.forEach {
+            switch $0 {
+            case let .Insert(cursor):
+                insertItemsAtIndexPaths([NSIndexPath(forItem: cursor.index, inSection: 0)])
+            case let .Remove(cursor):
+                deleteItemsAtIndexPaths([NSIndexPath(forItem: cursor.index, inSection: 0)])
+            }
         }
     }
 }
 
 public final class CollectionViewDataSource<Element>: NSObject, UICollectionViewDataSource {
-    public typealias PatchProducer = SignalProducer<Delta<CollectionChange<[Element]>>, NoError>
+    public typealias PatchProducer = SignalProducer<[CollectionChange<[Element]>], NoError>
     public typealias ObserveProducer = SignalProducer<([Element], PatchProducer), NoError>
     public typealias Configure = (Element, UICollectionView, NSIndexPath) -> UICollectionViewCell
 
@@ -55,7 +48,7 @@ public final class CollectionViewDataSource<Element>: NSObject, UICollectionView
             patches.startWithNext { patch in
                 self.elements = self.elements.apply(patch)
                 collectionView.performBatchUpdates({
-                    collectionView.applyDelta(patch)
+                    collectionView.applyPatch(patch)
                 }, completion: nil)
             }
         }
