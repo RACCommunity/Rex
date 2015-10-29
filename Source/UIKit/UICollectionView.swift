@@ -11,6 +11,26 @@
 import ReactiveCocoa
 import UIKit
 
+extension UICollectionView {
+    public func applyDelta<C: CollectionType where C.Index == Int>(delta: Delta<CollectionChange<C>>) {
+        switch delta {
+        case let .Single(change):
+            applyChange(change)
+        case let .Batch(changes):
+            changes.forEach { applyChange($0) }
+        }
+    }
+    
+    public func applyChange<C: CollectionType where C.Index == Int>(change: CollectionChange<C>) {
+        switch change {
+        case let .Insert(cursor):
+            insertItemsAtIndexPaths([NSIndexPath(forItem: cursor.index, inSection: 0)])
+        case let .Remove(cursor):
+            deleteItemsAtIndexPaths([NSIndexPath(forItem: cursor.index, inSection: 0)])
+        }
+    }
+}
+
 public final class CollectionViewDataSource<Element>: NSObject, UICollectionViewDataSource {
     public typealias PatchProducer = SignalProducer<Delta<CollectionChange<[Element]>>, NoError>
     public typealias ObserveProducer = SignalProducer<([Element], PatchProducer), NoError>
@@ -33,9 +53,10 @@ public final class CollectionViewDataSource<Element>: NSObject, UICollectionView
             collectionView.reloadData()
 
             patches.startWithNext { patch in
-                self.elements.apply(patch)
-                // TODO Inspect the patch
-                collectionView.reloadData()
+                self.elements = self.elements.apply(patch)
+                collectionView.performBatchUpdates({
+                    collectionView.applyDelta(patch)
+                }, completion: nil)
             }
         }
     }

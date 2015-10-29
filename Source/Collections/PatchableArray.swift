@@ -8,7 +8,8 @@
 
 extension Array: Patchable {
     public typealias Patch = Delta<CollectionChange<[Element]>>
-    
+
+    @warn_unused_result
     public func apply(patch: Patch) -> Array {
         var clone = self
 
