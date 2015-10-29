@@ -12,14 +12,21 @@ import ReactiveCocoa
 import UIKit
 
 extension UICollectionView {
-    public func applyPatch<C: CollectionType where C.Index == Int>(patch: [CollectionChange<C>]) {
-        patch.forEach {
-            switch $0 {
-            case let .Insert(cursor):
-                insertItemsAtIndexPaths([NSIndexPath(forItem: cursor.index, inSection: 0)])
-            case let .Remove(cursor):
-                deleteItemsAtIndexPaths([NSIndexPath(forItem: cursor.index, inSection: 0)])
-            }
+    /// Creates an animation producer from a set of collection changes.
+    public func animatePatch<C: CollectionType where C.Index == Int>(patch: [CollectionChange<C>]) -> SignalProducer<(), NoError> {
+        return SignalProducer { observer, _ in
+            return self.performBatchUpdates({
+                patch.forEach {
+                    switch $0 {
+                    case let .Insert(cursor):
+                        self.insertItemsAtIndexPaths([NSIndexPath(forItem: cursor.index, inSection: 0)])
+                    case let .Remove(cursor):
+                        self.deleteItemsAtIndexPaths([NSIndexPath(forItem: cursor.index, inSection: 0)])
+                    }
+                }
+            }, completion: { _ in
+                observer.sendCompleted()
+            })
         }
     }
 }
@@ -39,22 +46,26 @@ public final class CollectionViewDataSource<Element>: NSObject, UICollectionView
 
         collectionView.dataSource = self
 
-        producer.startWithNext { elements, patches in
+        producer.flatMap(.Latest) { (elements, patches) -> PatchProducer in
             precondition(collectionView.dataSource === self, "Data source changed!")
-            
+
+            // Force reload if the backing set of elements reset
             self.elements = elements
             collectionView.reloadData()
 
-            patches.startWithNext { patch in
-                precondition(collectionView.dataSource === self, "Data source changed!")
-
-                self.elements = self.elements.apply(patch)
-
-                collectionView.performBatchUpdates({
-                    collectionView.applyPatch(patch)
-                }, completion: nil)
-            }
+            return patches
         }
+        .flatMap(.Concat) { (patch) -> SignalProducer<(), NoError> in
+            precondition(collectionView.dataSource === self, "Data source changed!")
+
+            // Defer changes until each set of animations completes. This avoids a nasty
+            // class of bugs where you can delete items that are animating and crash the
+            // collection view.
+            return collectionView.animatePatch(patch).on(started: {
+                self.elements = self.elements.apply(patch)
+            })
+        }
+        .start { _ in return }
     }
 
     public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
