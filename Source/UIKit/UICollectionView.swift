@@ -46,7 +46,10 @@ public final class CollectionViewDataSource<Element>: NSObject, UICollectionView
             collectionView.reloadData()
 
             patches.startWithNext { patch in
+                precondition(collectionView.dataSource === self, "Data source changed!")
+
                 self.elements = self.elements.apply(patch)
+
                 collectionView.performBatchUpdates({
                     collectionView.applyPatch(patch)
                 }, completion: nil)
