@@ -32,6 +32,12 @@ class TextCell: UICollectionViewCell {
     }
 }
 
+extension QueueScheduler {
+    func delay(interval: NSTimeInterval, action: () -> ()) {
+        scheduleAfter(NSDate(timeIntervalSinceNow: interval), action: action)
+    }
+}
+
 class ViewController: UIViewController {
 
     var dataSource: CollectionViewDataSource<Int>?
@@ -44,12 +50,11 @@ class ViewController: UIViewController {
         collectionView.registerClass(TextCell.self, forCellWithReuseIdentifier: "cell");
         collectionView.backgroundColor = UIColor.cyanColor();
         
-        let array = ObservableArray<Int>()
+        var array = ObservableArray<Int>()
         array.replaceRange(0..<0, with: [1, 2, 3, 4, 5, 6, 7, 8])
         
         dataSource = CollectionViewDataSource(collectionView: collectionView, producer: array.observe()) { value, collectionView, indexPath in
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TextCell
-            
             cell.text = "\(value)"
 
             switch value % 3 {
@@ -58,17 +63,17 @@ class ViewController: UIViewController {
             case 2: cell.backgroundColor = UIColor.blueColor()
             default: fatalError()
             }
+
             return cell
         }
 
         view.addSubview(collectionView)
 
-        QueueScheduler.mainQueueScheduler.scheduleAfter(NSDate(timeIntervalSinceNow: 2)) {
-            array.replaceRange(1..<3, with: [3, 2, 1, 0])
-        }
-        QueueScheduler.mainQueueScheduler.scheduleAfter(NSDate(timeIntervalSinceNow: 4)) {
-            array.replaceRange(2..<6, with: [9, 10])
-        }
+        QueueScheduler.mainQueueScheduler.delay(2) { array.replaceRange(1..<3, with: [3, 2, 1, 0]) }
+        QueueScheduler.mainQueueScheduler.delay(4) { array.replaceRange(2..<6, with: [9, 10]) }
+        QueueScheduler.mainQueueScheduler.delay(6) { array[0] = 0 }
+        QueueScheduler.mainQueueScheduler.delay(8) { array.appendContentsOf([11, 12]) }
+        QueueScheduler.mainQueueScheduler.delay(10) { array.removeFirst(3) }
     }
 }
 
