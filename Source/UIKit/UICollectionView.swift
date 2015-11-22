@@ -15,7 +15,7 @@ extension UICollectionView {
     /// Creates an animation producer from a set of collection changes.
     public func animatePatch<C: CollectionType where C.Index == Int>(patch: [CollectionChange<C>]) -> SignalProducer<(), NoError> {
         return SignalProducer { observer, _ in
-            return self.performBatchUpdates({
+            self.performBatchUpdates({
                 patch.forEach {
                     switch $0 {
                     case let .Insert(cursor):
