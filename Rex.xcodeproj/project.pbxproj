@@ -53,6 +53,10 @@
 		D87DB2261BDBB73100894F74 /* Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DB2241BDBB73100894F74 /* Change.swift */; };
 		D87DB22B1BDBBCF800894F74 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DB22A1BDBBCF800894F74 /* Observable.swift */; };
 		D87DB22C1BDBBCF800894F74 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DB22A1BDBBCF800894F74 /* Observable.swift */; };
+		D8A454061BD26A1A00C9E790 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A454051BD26A1A00C9E790 /* Property.swift */; };
+		D8A454071BD26A1A00C9E790 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A454051BD26A1A00C9E790 /* Property.swift */; };
+		D8A454091BD2772700C9E790 /* PropertyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A454081BD2772700C9E790 /* PropertyTests.swift */; };
+		D8A4540A1BD2772700C9E790 /* PropertyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A454081BD2772700C9E790 /* PropertyTests.swift */; };
 		D87DB22E1BDBC5EF00894F74 /* Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DB22D1BDBC5EF00894F74 /* Queryable.swift */; };
 		D87DB22F1BDBC5EF00894F74 /* Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DB22D1BDBC5EF00894F74 /* Queryable.swift */; };
 		D87DB2311BDBCAAA00894F74 /* Patchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DB2301BDBCAAA00894F74 /* Patchable.swift */; };
@@ -182,6 +186,8 @@
 		D86FFBDC1B34B691001A89B3 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		D87DB2241BDBB73100894F74 /* Change.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Change.swift; sourceTree = "<group>"; };
 		D87DB22A1BDBBCF800894F74 /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		D8A454051BD26A1A00C9E790 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		D8A454081BD2772700C9E790 /* PropertyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyTests.swift; sourceTree = "<group>"; };
 		D87DB22D1BDBC5EF00894F74 /* Queryable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queryable.swift; sourceTree = "<group>"; };
 		D87DB2301BDBCAAA00894F74 /* Patchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Patchable.swift; sourceTree = "<group>"; };
 		D87DB2331BDBCC8300894F74 /* PatchableArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatchableArray.swift; sourceTree = "<group>"; };
@@ -272,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				D86FFBD91B34B3F0001A89B3 /* Action.swift */,
+				D8A454051BD26A1A00C9E790 /* Property.swift */,
 				D8003EBC1AFED01000D7D3C5 /* Signal.swift */,
 				D8003EB81AFEC7A900D7D3C5 /* SignalProducer.swift */,
 				4238D5941B4D593E008534C0 /* AppKit */,
@@ -295,6 +302,7 @@
 		D8003E9D1AFEC3D400D7D3C5 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D8A454081BD2772700C9E790 /* PropertyTests.swift */,
 				D8003EBE1AFED2F800D7D3C5 /* SignalTests.swift */,
 				D8003EC01AFED30100D7D3C5 /* SignalProducerTests.swift */,
 				D834AEBE1BDAFC3600277B07 /* Collections */,
@@ -641,6 +649,7 @@
 			files = (
 				D87DB22B1BDBBCF800894F74 /* Observable.swift in Sources */,
 				D834AEBC1BDAF9EB00277B07 /* ObservableArray.swift in Sources */,
+				D8A454061BD26A1A00C9E790 /* Property.swift in Sources */,
 				D86FFBDA1B34B3F0001A89B3 /* Action.swift in Sources */,
 				D87DB22E1BDBC5EF00894F74 /* Queryable.swift in Sources */,
 				D87DB2251BDBB73100894F74 /* Change.swift in Sources */,
@@ -665,6 +674,7 @@
 				D8F0974A1B17F5E1002E15BA /* NSObjectTests.swift in Sources */,
 				D8003EC21AFED30F00D7D3C5 /* SignalTests.swift in Sources */,
 				D8003EC31AFED30F00D7D3C5 /* SignalProducerTests.swift in Sources */,
+				D8A454091BD2772700C9E790 /* PropertyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,6 +692,7 @@
 				D834AEB71BDAF90B00277B07 /* Cursor.swift in Sources */,
 				D834572D1AFEE45B0070616A /* Signal.swift in Sources */,
 				D8E4A6211B7BBB2100EAD8A8 /* UIBarItem.swift in Sources */,
+				D8A454071BD26A1A00C9E790 /* Property.swift in Sources */,
 				D8E4A6201B7BBB1600EAD8A8 /* UIBarButtonItem.swift in Sources */,
 				D8F097451B17F3C8002E15BA /* NSObject.swift in Sources */,
 				D87DB2321BDBCAAA00894F74 /* Patchable.swift in Sources */,
@@ -707,6 +718,7 @@
 				8289A2E81BD7F7900097FB60 /* UIViewTests.swift in Sources */,
 				D8F073161B863CE70047D546 /* UILabelTests.swift in Sources */,
 				8295FD8A1B87352D007C9000 /* UIButtonTests.swift in Sources */,
+				D8A4540A1BD2772700C9E790 /* PropertyTests.swift in Sources */,
 				D83457301AFEE45E0070616A /* SignalProducerTests.swift in Sources */,
 				D83457411AFEE6050070616A /* SignalTests.swift in Sources */,
 				8295FD8D1B87374A007C9000 /* UIBarButtonItemTests.swift in Sources */,
