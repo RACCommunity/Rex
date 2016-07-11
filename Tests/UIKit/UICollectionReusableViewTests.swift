@@ -17,7 +17,7 @@ class UICollectionReusableViewTests: XCTestCase {
 
         let cell = UICollectionViewCell()
 
-        cell.rex_hidden <~
+        cell.rex.isHidden <~
             hiddenProperty
                 .producer
                 .take(until: cell.rex_prepareForReuse)
