@@ -9,7 +9,7 @@
 import ReactiveCocoa
 import UIKit
 
-extension UIView: BindingsProviding {}
+extension UIView: BindablesProviding {}
 
 extension BindingsProtocol where Owner: UIView {
     /// Wraps a view's `alpha` value in a bindable property.

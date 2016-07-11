@@ -4,13 +4,13 @@ public protocol BindingsProtocol {
     var owner: Owner { get }
 }
 
-public protocol BindingsProviding: class {}
-extension BindingsProviding {
-    public var rex: Bindings<Self> {
-        return Bindings(owner: self)
+public protocol BindablesProviding: class {}
+extension BindablesProviding {
+    public var bindables: Bindables<Self> {
+        return Bindables(owner: self)
     }
 }
 
-public struct Bindings<Owner: AnyObject>: BindingsProtocol {
+public struct Bindables<Owner: AnyObject>: BindingsProtocol {
     public let owner: Owner
 }
