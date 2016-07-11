@@ -11,7 +11,7 @@ import UIKit
 
 extension UIView: BindingsProviding {}
 
-extension BindingsProtocol where Owner == UIView {
+extension BindingsProtocol where Owner: UIView {
     /// Wraps a view's `alpha` value in a bindable property.
     public var alpha: MutableProperty<CGFloat> {
         return associatedProperty(owner,
