@@ -43,6 +43,10 @@
 		9A5492131D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
 		9A5492141D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
 		9A5492151D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
+		9A54921C1D33400A009A8D44 /* Bindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A54921B1D33400A009A8D44 /* Bindings.swift */; };
+		9A54921D1D334010009A8D44 /* Bindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A54921B1D33400A009A8D44 /* Bindings.swift */; };
+		9A54921E1D334011009A8D44 /* Bindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A54921B1D33400A009A8D44 /* Bindings.swift */; };
+		9A54921F1D334012009A8D44 /* Bindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A54921B1D33400A009A8D44 /* Bindings.swift */; };
 		9DA915A41CA6301C003723B9 /* UIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A31CA6301C003723B9 /* UIDatePicker.swift */; };
 		9DA915A61CA63046003723B9 /* UIDatePickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */; };
 		C72CF3E51CBF188A00E19897 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF3E41CBF188A00E19897 /* RACSignal.swift */; };
@@ -239,6 +243,7 @@
 		8295FD881B873490007C9000 /* UIButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIButtonTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIBarButtonItemTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deprecations+Removals.swift"; sourceTree = SOURCE_ROOT; };
+		9A54921B1D33400A009A8D44 /* Bindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bindings.swift; sourceTree = "<group>"; };
 		9DA915A31CA6301C003723B9 /* UIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIDatePicker.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIDatePickerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C72CF3E41CBF188A00E19897 /* RACSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RACSignal.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -385,6 +390,7 @@
 		D8003E901AFEC3D400D7D3C5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				9A54921B1D33400A009A8D44 /* Bindings.swift */,
 				D86FFBD91B34B3F0001A89B3 /* Action.swift */,
 				D8A454051BD26A1A00C9E790 /* Property.swift */,
 				D8003EBC1AFED01000D7D3C5 /* Signal.swift */,
@@ -846,6 +852,7 @@
 				D8F0973B1B17F2F7002E15BA /* Data.swift in Sources */,
 				4238D5961B4D5950008534C0 /* NSTextField.swift in Sources */,
 				D8F0973D1B17F30D002E15BA /* UserDefaults.swift in Sources */,
+				9A54921C1D33400A009A8D44 /* Bindings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,6 +875,7 @@
 				9DA915A41CA6301C003723B9 /* UIDatePicker.swift in Sources */,
 				D86FFBD81B34B242001A89B3 /* UILabel.swift in Sources */,
 				7DCF5B331CC80D77004AEE75 /* UICollectionReusableView.swift in Sources */,
+				9A54921D1D334010009A8D44 /* Bindings.swift in Sources */,
 				D86FFBDB1B34B3F0001A89B3 /* Action.swift in Sources */,
 				D86FFBD21B34AD7A001A89B3 /* Association.swift in Sources */,
 				C7932E831C4B3F3000086F3C /* UITextField.swift in Sources */,
@@ -934,6 +942,7 @@
 				D8715D9E1C210FF9005F4191 /* Property.swift in Sources */,
 				D8715DA01C210FF9005F4191 /* SignalProducer.swift in Sources */,
 				D8715DA31C21107F005F4191 /* Association.swift in Sources */,
+				9A54921F1D334012009A8D44 /* Bindings.swift in Sources */,
 				D8715DA51C21107F005F4191 /* NSObject.swift in Sources */,
 				D8715D9F1C210FF9005F4191 /* Signal.swift in Sources */,
 				C72CF3E81CBF188A00E19897 /* RACSignal.swift in Sources */,
@@ -953,6 +962,7 @@
 				7DCF5B341CC80D78004AEE75 /* UICollectionReusableView.swift in Sources */,
 				9A5492141D33387D009A8D44 /* Deprecations+Removals.swift in Sources */,
 				D8715DCB1C211553005F4191 /* UIImageView.swift in Sources */,
+				9A54921E1D334011009A8D44 /* Bindings.swift in Sources */,
 				C7932E841C4B41E100086F3C /* UITextField.swift in Sources */,
 				7DBD48F41CC8141D0077AD4F /* Reusable.swift in Sources */,
 				D8715DC61C211553005F4191 /* UIBarButtonItem.swift in Sources */,
