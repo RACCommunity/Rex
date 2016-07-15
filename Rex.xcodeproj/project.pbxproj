@@ -43,6 +43,11 @@
 		9A5492131D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
 		9A5492141D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
 		9A5492151D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
+		9A7F46D51D38FE4700C42C85 /* UIKitExtensions.swift.gyb in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F46D41D38FE4700C42C85 /* UIKitExtensions.swift.gyb */; };
+		9A7F46D71D39000000C42C85 /* UIKitExtensions.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7F46D61D39000000C42C85 /* UIKitExtensions.generated.swift */; };
+		9A7F46DB1D39011B00C42C85 /* UIKitExtensions.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7F46D61D39000000C42C85 /* UIKitExtensions.generated.swift */; };
+		9A7F46DC1D39011F00C42C85 /* UIKitExtensions.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7F46D61D39000000C42C85 /* UIKitExtensions.generated.swift */; };
+		9A7F46DE1D39014F00C42C85 /* AppKitExtensions.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7F46DD1D39014F00C42C85 /* AppKitExtensions.generated.swift */; };
 		9DA915A41CA6301C003723B9 /* UIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A31CA6301C003723B9 /* UIDatePicker.swift */; };
 		9DA915A61CA63046003723B9 /* UIDatePickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */; };
 		C72CF3E51CBF188A00E19897 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF3E41CBF188A00E19897 /* RACSignal.swift */; };
@@ -239,6 +244,9 @@
 		8295FD881B873490007C9000 /* UIButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIButtonTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIBarButtonItemTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deprecations+Removals.swift"; sourceTree = SOURCE_ROOT; };
+		9A7F46D41D38FE4700C42C85 /* UIKitExtensions.swift.gyb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = UIKitExtensions.swift.gyb; path = Source/UIKitExtensions.swift.gyb; sourceTree = SOURCE_ROOT; };
+		9A7F46D61D39000000C42C85 /* UIKitExtensions.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIKitExtensions.generated.swift; path = Source/UIKitExtensions.generated.swift; sourceTree = SOURCE_ROOT; };
+		9A7F46DD1D39014F00C42C85 /* AppKitExtensions.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKitExtensions.generated.swift; sourceTree = "<group>"; };
 		9DA915A31CA6301C003723B9 /* UIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIDatePicker.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIDatePickerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C72CF3E41CBF188A00E19897 /* RACSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RACSignal.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -358,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				4238D5951B4D5950008534C0 /* NSTextField.swift */,
+				9A7F46DD1D39014F00C42C85 /* AppKitExtensions.generated.swift */,
 			);
 			name = AppKit;
 			sourceTree = "<group>";
@@ -469,6 +478,8 @@
 		D86FFBD31B34B0E2001A89B3 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				9A7F46D41D38FE4700C42C85 /* UIKitExtensions.swift.gyb */,
+				9A7F46D61D39000000C42C85 /* UIKitExtensions.generated.swift */,
 				45CED46B1D27BB8700788BDC /* UIActivityIndicatorView.swift */,
 				5173EBC71B625A6800C9B48E /* UIBarButtonItem.swift */,
 				5173EBC51B625A2600C9B48E /* UIBarItem.swift */,
@@ -597,6 +608,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8003EA41AFEC3D400D7D3C5 /* Build configuration list for PBXNativeTarget "Rex-Mac" */;
 			buildPhases = (
+				9A7F46DA1D3900F100C42C85 /* ShellScript */,
 				D8003E891AFEC3D400D7D3C5 /* Sources */,
 				D8003E8A1AFEC3D400D7D3C5 /* Frameworks */,
 				D8003E8B1AFEC3D400D7D3C5 /* Headers */,
@@ -634,6 +646,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D834572B1AFEE44E0070616A /* Build configuration list for PBXNativeTarget "Rex-iOS" */;
 			buildPhases = (
+				9A7F46D01D38FE1800C42C85 /* ShellScript */,
 				D834570F1AFEE44E0070616A /* Sources */,
 				D83457101AFEE44E0070616A /* Frameworks */,
 				D83457111AFEE44E0070616A /* Headers */,
@@ -671,6 +684,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8715D9B1C210F97005F4191 /* Build configuration list for PBXNativeTarget "Rex-watchOS" */;
 			buildPhases = (
+				9A7F46D91D3900E500C42C85 /* ShellScript */,
 				D8715D8F1C210F97005F4191 /* Sources */,
 				D8715D901C210F97005F4191 /* Frameworks */,
 				D8715D911C210F97005F4191 /* Headers */,
@@ -689,6 +703,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8715DB51C21123E005F4191 /* Build configuration list for PBXNativeTarget "Rex-tvOS" */;
 			buildPhases = (
+				9A7F46D81D3900DC00C42C85 /* ShellScript */,
 				D8715DAB1C21123E005F4191 /* Sources */,
 				D8715DAC1C21123E005F4191 /* Frameworks */,
 				D8715DAD1C21123E005F4191 /* Headers */,
@@ -783,6 +798,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A7F46D51D38FE4700C42C85 /* UIKitExtensions.swift.gyb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,6 +846,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9A7F46D01D38FE1800C42C85 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$PROJECT_DIR/script/gyb/gyb --line-directive '' -o $SOURCE_ROOT/Source/UIKitExtensions.generated.swift $SOURCE_ROOT/Source/UIKitExtensions.swift.gyb";
+		};
+		9A7F46D81D3900DC00C42C85 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$PROJECT_DIR/script/gyb/gyb --line-directive '' -o $SOURCE_ROOT/Source/UIKitExtensions.generated.swift $SOURCE_ROOT/Source/UIKitExtensions.swift.gyb";
+		};
+		9A7F46D91D3900E500C42C85 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$PROJECT_DIR/script/gyb/gyb --line-directive '' -o $SOURCE_ROOT/Source/UIKitExtensions.generated.swift $SOURCE_ROOT/Source/UIKitExtensions.swift.gyb";
+		};
+		9A7F46DA1D3900F100C42C85 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$PROJECT_DIR/script/gyb/gyb --line-directive '' -o $SOURCE_ROOT/Source/AppKitExtensions.generated.swift $SOURCE_ROOT/Source/AppKitExtensions.swift.gyb";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D8003E891AFEC3D400D7D3C5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -845,6 +916,7 @@
 				D8F097441B17F3C8002E15BA /* NSObject.swift in Sources */,
 				D8F0973B1B17F2F7002E15BA /* Data.swift in Sources */,
 				4238D5961B4D5950008534C0 /* NSTextField.swift in Sources */,
+				9A7F46DE1D39014F00C42C85 /* AppKitExtensions.generated.swift in Sources */,
 				D8F0973D1B17F30D002E15BA /* UserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -878,6 +950,7 @@
 				D8F0973E1B17F30D002E15BA /* UserDefaults.swift in Sources */,
 				D834572D1AFEE45B0070616A /* Signal.swift in Sources */,
 				D8E4A6211B7BBB2100EAD8A8 /* UIBarItem.swift in Sources */,
+				9A7F46D71D39000000C42C85 /* UIKitExtensions.generated.swift in Sources */,
 				7D2AA99B1CB6EFEB008AB5C9 /* UISwitch.swift in Sources */,
 				7DBD48F31CC8141D0077AD4F /* Reusable.swift in Sources */,
 				C72CF3E61CBF188A00E19897 /* RACSignal.swift in Sources */,
@@ -931,6 +1004,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A7F46DC1D39011F00C42C85 /* UIKitExtensions.generated.swift in Sources */,
 				D8715D9E1C210FF9005F4191 /* Property.swift in Sources */,
 				D8715DA01C210FF9005F4191 /* SignalProducer.swift in Sources */,
 				D8715DA31C21107F005F4191 /* Association.swift in Sources */,
@@ -948,6 +1022,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A7F46DB1D39011B00C42C85 /* UIKitExtensions.generated.swift in Sources */,
 				D8715DBB1C2112D1005F4191 /* Property.swift in Sources */,
 				D8715DCA1C211553005F4191 /* UILabel.swift in Sources */,
 				7DCF5B341CC80D78004AEE75 /* UICollectionReusableView.swift in Sources */,
