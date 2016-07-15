@@ -35,7 +35,7 @@ class UIButtonTests: XCTestCase {
         let button = UIButton(frame: CGRect.zero)
         _button = button
         
-        button.rex_enabled <~ SignalProducer(value: false)
+        button.rex_isEnabled <~ SignalProducer(value: false)
         XCTAssert(_button?.isEnabled == false)
     }
 

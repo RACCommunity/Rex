@@ -26,7 +26,7 @@ extension UIButton {
                     host?.addTarget(next, action: CocoaAction.selector, for: .touchUpInside)
                 }
 
-            host.rex_enabled <~ property.producer.flatMap(.latest) { $0.rex_enabledProducer }
+            host.rex_isEnabled <~ property.producer.flatMap(.latest) { $0.rex_enabledProducer }
 
             return property
         }

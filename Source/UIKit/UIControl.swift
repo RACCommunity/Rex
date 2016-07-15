@@ -36,23 +36,6 @@ extension UIControl {
     }
 #endif
 
-    /// Wraps a control's `enabled` state in a bindable property.
-    public var rex_enabled: MutableProperty<Bool> {
-        return associatedProperty(self, key: &enabledKey, initial: { $0.isEnabled }, setter: { $0.isEnabled = $1 })
-    }
-    
-    /// Wraps a control's `selected` state in a bindable property.
-    public var rex_selected: MutableProperty<Bool> {
-        return associatedProperty(self, key: &selectedKey, initial: { $0.isSelected }, setter: { $0.isSelected = $1 })
-    }
-    
-    /// Wraps a control's `highlighted` state in a bindable property.
-    public var rex_highlighted: MutableProperty<Bool> {
-        return associatedProperty(self, key: &highlightedKey, initial: { $0.isHighlighted }, setter: { $0.isHighlighted = $1 })
-    }
 }
 
-private var enabledKey: UInt8 = 0
-private var selectedKey: UInt8 = 0
-private var highlightedKey: UInt8 = 0
 private var valueChangedKey: UInt8 = 0

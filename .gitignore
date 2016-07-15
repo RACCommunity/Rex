@@ -4,5 +4,7 @@ xcuserdata
 *.xccheckout
 *.mode*
 *.pbxuser
+*.pyc
+*.generated.swift
 
 /Carthage
