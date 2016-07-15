@@ -4,5 +4,6 @@ xcuserdata
 *.xccheckout
 *.mode*
 *.pbxuser
+*.pyc
 
 /Carthage
