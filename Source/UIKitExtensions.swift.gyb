@@ -1,0 +1,81 @@
+%{
+import collections
+frameworks = ["UIKit", "ReactiveCocoa"]
+
+extensionInfo = {
+    "UIView": {
+        "alpha": "CGFloat",
+        "isHidden": {"type": "Bool", "renamed": "hidden"},
+        "isUserInteractionEnabled": {"type": "Bool", "renamed": "userInteractionEnabled"},
+        "backgroundColor": "UIColor?"
+    },
+    "UILabel": {
+        "text": "String?",
+        "attributedText": "AttributedString?",
+        "textColor": "UIColor"
+    },
+    "UIBarItem": {
+        "isEnabled": {"type": "Bool", "renamed": "enabled"}
+    },
+    "UIControl": {
+        "isEnabled": {"type": "Bool", "renamed": "enabled"},
+        "isHighlighted": {"type": "Bool", "renamed": "highlighted"},
+        "isSelected": {"type": "Bool", "renamed": "selected"}
+    },
+    "UIImageView": {
+        "image": "UIImage?",
+        "highlightedImage": "UIImage?"
+    },
+    "UIProgressView": {
+        "progress": "Float"
+    }
+}
+
+extensionInfoWithExpr = {
+
+}
+
+reusableViewClasses = ["UICollectionReusableView", "UITableViewHeaderFooterView", "UITableViewCell"]
+}%
+% for framework in frameworks:
+import ${framework}
+%end
+
+% for reusableViewClass in reusableViewClasses:
+extension ${reusableViewClass}: Reusable {}
+%end
+
+% for extClass, properties in extensionInfo.items():
+extension ${extClass} {
+
+    % for (key, type) in properties.items():
+%{
+        datatype = None
+        renamed = None
+        if isinstance(type, collections.Mapping):
+            datatype = type["type"]
+            renamed = type["renamed"]
+        else:
+            datatype = type
+}%
+% if renamed:
+    @available(*, unavailable, renamed:"rex_${key}")
+    public var rex_${renamed}: MutableProperty<${datatype}> { fatalError() }
+
+%end
+    public var rex_${key}: MutableProperty<${datatype}> {
+        return associatedProperty(self,
+					  key: &rac${extClass}${key[0].upper() + key[1:]}Key,
+					  initial: { $0.${key} },
+					  setter: { $0.${key} = $1 })
+	}
+
+	%end
+}
+
+%end
+% for extClass, properties in extensionInfo.items():
+        % for (key, type) in properties.items():
+private var rac${extClass}${key[0].upper() + key[1:]}Key = 0
+	%end
+%end
