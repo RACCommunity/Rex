@@ -30,8 +30,6 @@
 		8295FD871B87309F007C9000 /* UIControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD851B873081007C9000 /* UIControlTests.swift */; };
 		8295FD8A1B87352D007C9000 /* UIButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD881B873490007C9000 /* UIButtonTests.swift */; };
 		8295FD8D1B87374A007C9000 /* UIBarButtonItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */; };
-		9A080EED1D390AD100C013DB /* UISwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A080EEB1D390A7F00C013DB /* UISwitch.swift */; };
-		9A080EEF1D390B1200C013DB /* UIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A080EEE1D390B1200C013DB /* UIDatePicker.swift */; };
 		9A5492121D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
 		9A5492131D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
 		9A5492141D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
@@ -219,11 +217,9 @@
 		8295FD851B873081007C9000 /* UIControlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIControlTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8295FD881B873490007C9000 /* UIButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIButtonTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIBarButtonItemTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		9A080EEB1D390A7F00C013DB /* UISwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISwitch.swift; sourceTree = "<group>"; };
-		9A080EEE1D390B1200C013DB /* UIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDatePicker.swift; sourceTree = "<group>"; };
 		9A080EF01D390B5F00C013DB /* AppKitExtensions.swift.gyb */ = {isa = PBXFileReference; lastKnownFileType = text; path = AppKitExtensions.swift.gyb; sourceTree = "<group>"; };
 		9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deprecations+Removals.swift"; sourceTree = SOURCE_ROOT; };
-		9A7F46D41D38FE4700C42C85 /* UIKitExtensions.swift.gyb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = UIKitExtensions.swift.gyb; path = Source/UIKitExtensions.swift.gyb; sourceTree = SOURCE_ROOT; };
+		9A7F46D41D38FE4700C42C85 /* UIKitExtensions.swift.gyb */ = {isa = PBXFileReference; explicitFileType = text.script.python; fileEncoding = 4; name = UIKitExtensions.swift.gyb; path = Source/UIKitExtensions.swift.gyb; sourceTree = SOURCE_ROOT; wrapsLines = 1; };
 		9A7F46D61D39000000C42C85 /* UIKitExtensions.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIKitExtensions.generated.swift; path = Source/UIKitExtensions.generated.swift; sourceTree = SOURCE_ROOT; };
 		9A7F46DD1D39014F00C42C85 /* AppKitExtensions.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKitExtensions.generated.swift; sourceTree = "<group>"; };
 		9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIDatePickerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -460,9 +456,7 @@
 				45CED46B1D27BB8700788BDC /* UIActivityIndicatorView.swift */,
 				5173EBC71B625A6800C9B48E /* UIBarButtonItem.swift */,
 				D86FFBDC1B34B691001A89B3 /* UIButton.swift */,
-				9A080EEE1D390B1200C013DB /* UIDatePicker.swift */,
 				D86FFBD41B34B0FE001A89B3 /* UIControl.swift */,
-				9A080EEB1D390A7F00C013DB /* UISwitch.swift */,
 				5B1C882D1D0715CE000B888F /* UISegmentedControl.swift */,
 				C7932E811C4B3EDB00086F3C /* UITextField.swift */,
 				C7DCE2B21CB3C872001217D8 /* UITextView.swift */,
@@ -915,7 +909,6 @@
 				7DBD48F31CC8141D0077AD4F /* Reusable.swift in Sources */,
 				C72CF3E61CBF188A00E19897 /* RACSignal.swift in Sources */,
 				D8A454071BD26A1A00C9E790 /* Property.swift in Sources */,
-				9A080EEF1D390B1200C013DB /* UIDatePicker.swift in Sources */,
 				D8E4A6201B7BBB1600EAD8A8 /* UIBarButtonItem.swift in Sources */,
 				D8F097451B17F3C8002E15BA /* NSObject.swift in Sources */,
 				C7945F111CC192E800DC9E37 /* UIViewController.swift in Sources */,
@@ -927,7 +920,6 @@
 				9A5492131D33387D009A8D44 /* Deprecations+Removals.swift in Sources */,
 				45CED4711D27C1EB00788BDC /* UIActivityIndicatorView.swift in Sources */,
 				7D0DABAA1CCC381F00B6CD2B /* UIControl+EnableSendActionsForControlEvents.swift in Sources */,
-				9A080EED1D390AD100C013DB /* UISwitch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
