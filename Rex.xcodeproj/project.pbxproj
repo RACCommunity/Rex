@@ -34,10 +34,10 @@
 		9A5492131D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
 		9A5492141D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
 		9A5492151D33387D009A8D44 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */; };
-		9AB3BCA51D3D1A4300063B96 /* WatchKitExtensions.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3BCA41D3D1A4300063B96 /* WatchKitExtensions.generated.swift */; };
-		9AB3BCA81D3D1EB900063B96 /* AppKitExtensions.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3BCA71D3D1EB900063B96 /* AppKitExtensions.generated.swift */; };
-		9AB3BCAA1D3D1ED900063B96 /* UIKitExtensions.tvOS.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3BCA91D3D1ED900063B96 /* UIKitExtensions.tvOS.generated.swift */; };
-		9AB3BCAC1D3D1EE100063B96 /* UIKitExtensions.iOS.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3BCAB1D3D1EE100063B96 /* UIKitExtensions.iOS.generated.swift */; };
+		9AB3BCB01D3D23E900063B96 /* WatchKitExtensions.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3BCAE1D3D23E500063B96 /* WatchKitExtensions.generated.swift */; };
+		9AB3BCB41D3D240000063B96 /* UIKitExtensions.tvOS.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3BCB31D3D23FD00063B96 /* UIKitExtensions.tvOS.generated.swift */; };
+		9AB3BCB51D3D240300063B96 /* UIKitExtensions.iOS.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3BCB21D3D23FD00063B96 /* UIKitExtensions.iOS.generated.swift */; };
+		9AB3BCB81D3D242000063B96 /* AppKitExtensions.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB3BCB61D3D241A00063B96 /* AppKitExtensions.generated.swift */; };
 		9DA915A61CA63046003723B9 /* UIDatePickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */; };
 		C72CF3E51CBF188A00E19897 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF3E41CBF188A00E19897 /* RACSignal.swift */; };
 		C72CF3E61CBF188A00E19897 /* RACSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF3E41CBF188A00E19897 /* RACSignal.swift */; };
@@ -217,15 +217,15 @@
 		8295FD851B873081007C9000 /* UIControlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIControlTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8295FD881B873490007C9000 /* UIButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIButtonTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8295FD8B1B873748007C9000 /* UIBarButtonItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIBarButtonItemTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		9A080EF01D390B5F00C013DB /* AppKitExtensions.gyb.py */ = {isa = PBXFileReference; explicitFileType = text.script.python; path = AppKitExtensions.gyb.py; sourceTree = "<group>"; };
 		9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deprecations+Removals.swift"; sourceTree = SOURCE_ROOT; };
-		9A7F46D41D38FE4700C42C85 /* UIKitExtensions.gyb.py */ = {isa = PBXFileReference; explicitFileType = text.script.python; fileEncoding = 4; name = UIKitExtensions.gyb.py; path = Source/UIKitExtensions.gyb.py; sourceTree = SOURCE_ROOT; wrapsLines = 1; };
-		9AB3BCA31D3D1A1B00063B96 /* WatchKitExtensions.gyb.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = WatchKitExtensions.gyb.py; path = Source/WatchKitExtensions.gyb.py; sourceTree = SOURCE_ROOT; };
-		9AB3BCA41D3D1A4300063B96 /* WatchKitExtensions.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WatchKitExtensions.generated.swift; path = Source/WatchKitExtensions.generated.swift; sourceTree = SOURCE_ROOT; };
-		9AB3BCA61D3D1B0800063B96 /* Extensions.swift.gyb */ = {isa = PBXFileReference; lastKnownFileType = text; path = Extensions.swift.gyb; sourceTree = "<group>"; };
-		9AB3BCA71D3D1EB900063B96 /* AppKitExtensions.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKitExtensions.generated.swift; sourceTree = "<group>"; };
-		9AB3BCA91D3D1ED900063B96 /* UIKitExtensions.tvOS.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIKitExtensions.tvOS.generated.swift; path = Source/UIKitExtensions.tvOS.generated.swift; sourceTree = SOURCE_ROOT; };
-		9AB3BCAB1D3D1EE100063B96 /* UIKitExtensions.iOS.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIKitExtensions.iOS.generated.swift; path = Source/UIKitExtensions.iOS.generated.swift; sourceTree = SOURCE_ROOT; };
+		9AB3BCA61D3D1B0800063B96 /* Extensions.swift.gyb */ = {isa = PBXFileReference; explicitFileType = text.script.python; path = Extensions.swift.gyb; sourceTree = "<group>"; };
+		9AB3BCAE1D3D23E500063B96 /* WatchKitExtensions.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WatchKitExtensions.generated.swift; path = WatchKit/WatchKitExtensions.generated.swift; sourceTree = "<group>"; };
+		9AB3BCAF1D3D23E500063B96 /* WatchKitExtensions.gyb.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = WatchKitExtensions.gyb.py; sourceTree = "<group>"; };
+		9AB3BCB11D3D23FD00063B96 /* UIKitExtensions.gyb.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = UIKitExtensions.gyb.py; sourceTree = "<group>"; };
+		9AB3BCB21D3D23FD00063B96 /* UIKitExtensions.iOS.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIKitExtensions.iOS.generated.swift; path = UIKit/UIKitExtensions.iOS.generated.swift; sourceTree = "<group>"; };
+		9AB3BCB31D3D23FD00063B96 /* UIKitExtensions.tvOS.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIKitExtensions.tvOS.generated.swift; path = UIKit/UIKitExtensions.tvOS.generated.swift; sourceTree = "<group>"; };
+		9AB3BCB61D3D241A00063B96 /* AppKitExtensions.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppKitExtensions.generated.swift; path = AppKit/AppKitExtensions.generated.swift; sourceTree = "<group>"; };
+		9AB3BCB71D3D241A00063B96 /* AppKitExtensions.gyb.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = AppKitExtensions.gyb.py; path = AppKit/AppKitExtensions.gyb.py; sourceTree = "<group>"; };
 		9DA915A51CA63046003723B9 /* UIDatePickerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIDatePickerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C72CF3E41CBF188A00E19897 /* RACSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RACSignal.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C7932E811C4B3EDB00086F3C /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UITextField.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -341,8 +341,7 @@
 		4238D5941B4D593E008534C0 /* AppKit */ = {
 			isa = PBXGroup;
 			children = (
-				9A080EF01D390B5F00C013DB /* AppKitExtensions.gyb.py */,
-				9AB3BCA71D3D1EB900063B96 /* AppKitExtensions.generated.swift */,
+				9AB3BCB71D3D241A00063B96 /* AppKitExtensions.gyb.py */,
 				4238D5951B4D5950008534C0 /* NSTextField.swift */,
 			);
 			name = AppKit;
@@ -356,15 +355,25 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		9AB3BCA21D3D19F200063B96 /* WatchKit */ = {
+		9AB3BCAD1D3D23E500063B96 /* WatchKit */ = {
 			isa = PBXGroup;
 			children = (
-				9AB3BCA31D3D1A1B00063B96 /* WatchKitExtensions.gyb.py */,
-				9AB3BCA41D3D1A4300063B96 /* WatchKitExtensions.generated.swift */,
+				9AB3BCAF1D3D23E500063B96 /* WatchKitExtensions.gyb.py */,
 			);
-			name = WatchKit;
-			path = UIKit;
+			path = WatchKit;
 			sourceTree = "<group>";
+		};
+		9AB3BCBA1D3D243C00063B96 /* Generated Sources */ = {
+			isa = PBXGroup;
+			children = (
+				9AB3BCB61D3D241A00063B96 /* AppKitExtensions.generated.swift */,
+				9AB3BCAE1D3D23E500063B96 /* WatchKitExtensions.generated.swift */,
+				9AB3BCB21D3D23FD00063B96 /* UIKitExtensions.iOS.generated.swift */,
+				9AB3BCB31D3D23FD00063B96 /* UIKitExtensions.tvOS.generated.swift */,
+			);
+			name = "Generated Sources";
+			path = Source;
+			sourceTree = SOURCE_ROOT;
 		};
 		D8003E841AFEC3D400D7D3C5 = {
 			isa = PBXGroup;
@@ -390,8 +399,9 @@
 				9AB3BCA61D3D1B0800063B96 /* Extensions.swift.gyb */,
 				4238D5941B4D593E008534C0 /* AppKit */,
 				D8F097391B17F2BF002E15BA /* Foundation */,
-				9AB3BCA21D3D19F200063B96 /* WatchKit */,
+				9AB3BCAD1D3D23E500063B96 /* WatchKit */,
 				D86FFBD31B34B0E2001A89B3 /* UIKit */,
+				9AB3BCBA1D3D243C00063B96 /* Generated Sources */,
 				D8003E911AFEC3D400D7D3C5 /* Supporting Files */,
 				9A5492111D33387D009A8D44 /* Deprecations+Removals.swift */,
 			);
@@ -467,9 +477,7 @@
 		D86FFBD31B34B0E2001A89B3 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				9A7F46D41D38FE4700C42C85 /* UIKitExtensions.gyb.py */,
-				9AB3BCAB1D3D1EE100063B96 /* UIKitExtensions.iOS.generated.swift */,
-				9AB3BCA91D3D1ED900063B96 /* UIKitExtensions.tvOS.generated.swift */,
+				9AB3BCB11D3D23FD00063B96 /* UIKitExtensions.gyb.py */,
 				45CED46B1D27BB8700788BDC /* UIActivityIndicatorView.swift */,
 				5173EBC71B625A6800C9B48E /* UIBarButtonItem.swift */,
 				D86FFBDC1B34B691001A89B3 /* UIButton.swift */,
@@ -837,7 +845,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PROJECT_DIR/script/gyb/gyb -Dframework=UIKit -Dtarget=iOS --line-directive '' -o $SOURCE_ROOT/Source/UIKitExtensions.iOS.generated.swift $SOURCE_ROOT/Source/Extensions.swift.gyb";
+			shellScript = "$PROJECT_DIR/script/gyb/gyb -Dframework=UIKit -Dtarget=iOS --line-directive '' -o $SOURCE_ROOT/Source/UIKit/UIKitExtensions.iOS.generated.swift $SOURCE_ROOT/Source/Extensions.swift.gyb";
 		};
 		9A7F46D81D3900DC00C42C85 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -850,7 +858,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PROJECT_DIR/script/gyb/gyb -Dframework=UIKit -Dtarget=tvOS --line-directive '' -o $SOURCE_ROOT/Source/UIKitExtensions.tvOS.generated.swift $SOURCE_ROOT/Source/Extensions.swift.gyb";
+			shellScript = "$PROJECT_DIR/script/gyb/gyb -Dframework=UIKit -Dtarget=tvOS --line-directive '' -o $SOURCE_ROOT/Source/UIKit/UIKitExtensions.tvOS.generated.swift $SOURCE_ROOT/Source/Extensions.swift.gyb";
 		};
 		9A7F46D91D3900E500C42C85 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -863,7 +871,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PROJECT_DIR/script/gyb/gyb -Dframework=WatchKit -Dtarget=watchOS --line-directive '' -o $SOURCE_ROOT/Source/WatchKitExtensions.generated.swift $SOURCE_ROOT/Source/Extensions.swift.gyb";
+			shellScript = "$PROJECT_DIR/script/gyb/gyb -Dframework=WatchKit -Dtarget=watchOS --line-directive '' -o $SOURCE_ROOT/Source/WatchKit/WatchKitExtensions.generated.swift $SOURCE_ROOT/Source/Extensions.swift.gyb";
 		};
 		9A7F46DA1D3900F100C42C85 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -876,7 +884,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PROJECT_DIR/script/gyb/gyb -Dframework=AppKit -Dtarget=macOS --line-directive '' -o $SOURCE_ROOT/Source/AppKitExtensions.generated.swift $SOURCE_ROOT/Source/Extensions.swift.gyb";
+			shellScript = "$PROJECT_DIR/script/gyb/gyb -Dframework=AppKit -Dtarget=macOS --line-directive '' -o $SOURCE_ROOT/Source/AppKit/AppKitExtensions.generated.swift $SOURCE_ROOT/Source/Extensions.swift.gyb";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -895,7 +903,7 @@
 				D8F097441B17F3C8002E15BA /* NSObject.swift in Sources */,
 				D8F0973B1B17F2F7002E15BA /* Data.swift in Sources */,
 				4238D5961B4D5950008534C0 /* NSTextField.swift in Sources */,
-				9AB3BCA81D3D1EB900063B96 /* AppKitExtensions.generated.swift in Sources */,
+				9AB3BCB81D3D242000063B96 /* AppKitExtensions.generated.swift in Sources */,
 				D8F0973D1B17F30D002E15BA /* UserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -917,7 +925,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86FFBDB1B34B3F0001A89B3 /* Action.swift in Sources */,
-				9AB3BCAC1D3D1EE100063B96 /* UIKitExtensions.iOS.generated.swift in Sources */,
+				9AB3BCB51D3D240300063B96 /* UIKitExtensions.iOS.generated.swift in Sources */,
 				D86FFBD21B34AD7A001A89B3 /* Association.swift in Sources */,
 				C7932E831C4B3F3000086F3C /* UITextField.swift in Sources */,
 				5B7F81E31D0842AD0014B06D /* UISegmentedControl.swift in Sources */,
@@ -982,7 +990,7 @@
 				D8715DA41C21107F005F4191 /* Data.swift in Sources */,
 				9A5492151D33387D009A8D44 /* Deprecations+Removals.swift in Sources */,
 				D8715D9D1C210FF9005F4191 /* Action.swift in Sources */,
-				9AB3BCA51D3D1A4300063B96 /* WatchKitExtensions.generated.swift in Sources */,
+				9AB3BCB01D3D23E900063B96 /* WatchKitExtensions.generated.swift in Sources */,
 				D8715DA61C21107F005F4191 /* UserDefaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -996,7 +1004,7 @@
 				C7932E841C4B41E100086F3C /* UITextField.swift in Sources */,
 				7DBD48F41CC8141D0077AD4F /* Reusable.swift in Sources */,
 				D8715DC61C211553005F4191 /* UIBarButtonItem.swift in Sources */,
-				9AB3BCAA1D3D1ED900063B96 /* UIKitExtensions.tvOS.generated.swift in Sources */,
+				9AB3BCB41D3D240000063B96 /* UIKitExtensions.tvOS.generated.swift in Sources */,
 				D8715DBD1C2112D1005F4191 /* SignalProducer.swift in Sources */,
 				D8715DBE1C2112D6005F4191 /* Association.swift in Sources */,
 				D8715DC01C2112D6005F4191 /* NSObject.swift in Sources */,

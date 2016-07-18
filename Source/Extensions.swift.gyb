@@ -15,7 +15,8 @@ except NameError:
 ### Load the configuration file for the framework.
 
 config_name = framework + "Extensions.gyb.py"
-config_path = os.path.dirname(os.path.realpath(__file__)) + "/" + config_name
+config_path = os.path.dirname(os.path.realpath(__file__)) + "/" + framework + "/" + config_name
+
 if not os.path.exists(config_path):
     sys.exit(config_path + " was not found.")
 execfile(config_path)
