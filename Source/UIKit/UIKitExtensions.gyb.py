@@ -10,7 +10,7 @@ extension_info = {
     },
     "UILabel": {
         "text": {"type": "String?"},
-        "attributedText": {"type": "AttributedString?"},
+        "attributedText": {"type": "NSAttributedString?"},
         "textColor": {"type": "UIColor"}
     },
     "UIBarItem": {

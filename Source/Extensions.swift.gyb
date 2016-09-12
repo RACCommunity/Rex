@@ -46,7 +46,8 @@ except NameError:
 % for framework in import_frameworks:
 import ${framework}
 % end
-import ReactiveCocoa
+import Foundation
+import ReactiveSwift
 
 % for class_name in reusable_view_classes:
 extension ${class_name}: Reusable {}
