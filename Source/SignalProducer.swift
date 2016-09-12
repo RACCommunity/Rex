@@ -14,11 +14,11 @@ extension SignalProducerProtocol {
     /// Buckets each received value into a group based on the key returned
     /// from `grouping`. Termination events on the original signal are
     /// also forwarded to each producer group.
-    public func group<Key: Hashable>(by grouping: (Value) -> Key) -> SignalProducer<(Key, SignalProducer<Value, Error>), Error> {
+    public func group<Key: Hashable>(by grouping: @escaping (Value) -> Key) -> SignalProducer<(Key, SignalProducer<Value, Error>), Error> {
         return SignalProducer<(Key, SignalProducer<Value, Error>), Error> { observer, disposable in
             var groups: [Key: Signal<Value, Error>.Observer] = [:]
 
-            let lock = RecursiveLock()
+            let lock = NSRecursiveLock()
             lock.name = "me.neilpa.rex.groupBy"
 
             self.start { event in
@@ -57,7 +57,7 @@ extension SignalProducerProtocol {
 
     /// Applies `transform` to values from self with non-`nil` results unwrapped and
     /// forwared on the returned producer.
-    public func filterMap<U>(_ transform: (Value) -> U?) -> SignalProducer<U, Error> {
+    public func filterMap<U>(_ transform: @escaping (Value) -> U?) -> SignalProducer<U, Error> {
         return lift { $0.filterMap(transform) }
     }
 
@@ -96,7 +96,7 @@ extension SignalProducerProtocol {
     }
 
     /// Delays retrying on failure by `interval` up to `count` attempts.
-    public func deferredRetry(interval: TimeInterval, on scheduler: DateSchedulerProtocol, count: Int = .max) -> SignalProducer<Value, Error> {
+    public func deferredRetry(_ interval: TimeInterval, on scheduler: DateSchedulerProtocol, count: Int = .max) -> SignalProducer<Value, Error> {
         precondition(count >= 0)
 
         if count == 0 {
@@ -129,7 +129,7 @@ extension SignalProducerProtocol where Value: Sequence {
 /// https://github.com/ReactiveCocoa/ReactiveCocoa/blob/RAC5-swift3/ReactiveCocoa/Swift/SignalProducer.swift
 
 extension SignalProducer {
-    private static func bufferingProducer(upTo capacity: Int) -> (SignalProducer, Signal<Value, Error>.Observer) {
+    fileprivate static func bufferingProducer(upTo capacity: Int) -> (SignalProducer, Signal<Value, Error>.Observer) {
         precondition(capacity >= 0, "Invalid capacity: \(capacity)")
 
         // Used as an atomic variable so we can remove observers without needing
@@ -143,19 +143,20 @@ extension SignalProducer {
             let replayBuffer = ReplayBuffer<Value>()
             var replayValues: [Value] = []
             var replayToken: RemovalToken?
-            var next = state.modify { state in
+            var terminationEvent: Event<Value, Error>? = state.modify { state in
                 replayValues = state.values
                 if replayValues.isEmpty {
                     token = state.observers?.insert(observer)
                 } else {
                     replayToken = state.replayBuffers.insert(replayBuffer)
                 }
+                return state.terminationEvent
             }
 
             while !replayValues.isEmpty {
                 replayValues.forEach(observer.sendNext)
 
-                next = state.modify { state in
+                terminationEvent = state.modify { state in
                     replayValues = replayBuffer.values
                     replayBuffer.values = []
                     if replayValues.isEmpty {
@@ -164,10 +165,11 @@ extension SignalProducer {
                         }
                         token = state.observers?.insert(observer)
                     }
+                    return state.terminationEvent
                 }
             }
 
-            if let terminationEvent = next.terminationEvent {
+            if let terminationEvent = terminationEvent {
                 observer.action(terminationEvent)
             }
 
@@ -181,18 +183,21 @@ extension SignalProducer {
         }
 
         let bufferingObserver: Signal<Value, Error>.Observer = Observer { event in
-            let originalState = state.modify { state in
-                if let value = event.value {
-                    state.add(value, upTo: capacity)
-                } else {
-                    // Disconnect all observers and prevent future
-                    // attachments.
-                    state.terminationEvent = event
-                    state.observers = nil
+            let observers: Bag<Signal<Value, Error>.Observer>? = state.modify { state in
+                defer {
+                    if let value = event.value {
+                        state.add(value, upTo: capacity)
+                    } else {
+                        // Disconnect all observers and prevent future
+                        // attachments.
+                        state.terminationEvent = event
+                        state.observers = nil
+                    }
                 }
+                return state.observers
             }
 
-            originalState.observers?.forEach { $0.action(event) }
+            observers?.forEach { $0.action(event) }
         }
 
         return (producer, bufferingObserver)
@@ -201,29 +206,29 @@ extension SignalProducer {
 
 /// A uniquely identifying token for Observers that are replaying values in
 /// BufferState.
-private final class ReplayBuffer<Value> {
-    private var values: [Value] = []
+fileprivate final class ReplayBuffer<Value> {
+    var values: [Value] = []
 }
 
-private struct BufferState<Value, Error: ErrorProtocol> {
+fileprivate struct BufferState<V, E: Error> {
     /// All values in the buffer.
-    var values: [Value] = []
+    var values: [V] = []
 
     /// Any terminating event sent to the buffer.
     ///
     /// This will be nil if termination has not occurred.
-    var terminationEvent: Event<Value, Error>?
+    var terminationEvent: Event<V, E>?
     
     /// The observers currently attached to the buffered producer, or nil if the
     /// producer was terminated.
-    var observers: Bag<Signal<Value, Error>.Observer>? = Bag()
+    var observers: Bag<Signal<V, E>.Observer>? = Bag()
     
     /// The set of unused replay token identifiers.
-    var replayBuffers: Bag<ReplayBuffer<Value>> = Bag()
+    var replayBuffers: Bag<ReplayBuffer<V>> = Bag()
     
     /// Appends a new value to the buffer, trimming it down to the given capacity
     /// if necessary.
-    mutating func add(_ value: Value, upTo capacity: Int) {
+    mutating func add(_ value: V, upTo capacity: Int) {
         precondition(capacity >= 0)
         
         for buffer in replayBuffers {
