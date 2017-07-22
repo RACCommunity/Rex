@@ -1,3 +1,5 @@
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 # ⚠️ Deprecated ⚠️ 
 
 This repo is no longer being maintained. It has been supersede by: 
