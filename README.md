@@ -1,3 +1,18 @@
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+# ⚠️ Deprecated ⚠️ 
+
+This repo is no longer being maintained. It has been supersede by: 
+
+1. [ReactiveSwift](https://github.com/ReactiveCocoa/ReactiveSwift): for core operators.
+2. [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa): for UI operators.
+
+Some operators have not been ported. If something is amiss, please open a PR, or an issue, in the corresponding repo. ❤️
+
+Thanks!
+
+--- 
+
 # Rex [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 Extensions for [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) that may not fit in the core framework.
 
